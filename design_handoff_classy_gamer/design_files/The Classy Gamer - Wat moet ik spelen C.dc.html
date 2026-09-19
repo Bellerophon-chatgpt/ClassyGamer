@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{background:#06152C;color:#F7F5ED;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55;}
+  a{color:#b3a9f0;text-decoration:none;}
+  a:hover{color:#c9c1f5;}
+  ::selection{background:#6C5CE7;color:#fff;}
+  summary::-webkit-details-marker{display:none;}
+  @media(max-width:860px){.nav-desktop{display:none!important;}.nav-burger{display:flex!important;}}
+</style>
+</helmet>
+
+<div style="background:#06152C;">
+
+  <header style="position:sticky;top:0;z-index:50;background:rgba(6,21,44,0.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(247,245,237,0.1);">
+    <div style="max-width:1200px;margin:0 auto;padding:15px 32px;display:flex;align-items:center;gap:24px;">
+      <a href="The%20Classy%20Gamer%20-%20Home%20C.dc.html" style="display:flex;align-items:center;gap:12px;">
+        <div style="border:1.5px solid #F7F5ED;border-radius:5px;padding:5px 9px;text-align:center;line-height:0.95;">
+          <div style="font-family:'Fraunces';font-weight:800;font-size:10px;letter-spacing:0.16em;color:#F7F5ED;">THE</div>
+          <div style="font-family:'Fraunces';font-weight:800;font-size:13px;letter-spacing:0.04em;color:#F7F5ED;">CLASSY</div>
+          <div style="font-family:'Fraunces';font-weight:800;font-size:13px;letter-spacing:0.04em;color:#F7F5ED;">GAMER</div>
+        </div>
+      </a>
+      <nav class="nav-desktop" style="display:flex;gap:22px;margin-left:18px;">
+        <a href="The%20Classy%20Gamer%20-%20Home%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;">Home</a>
+        <a href="The%20Classy%20Gamer%20-%20Reviewpagina.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;">Reviews</a>
+                <a href="The%20Classy%20Gamer%20-%20Discover%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;">Discover</a>
+        <a href="The%20Classy%20Gamer%20-%20Wat%20moet%20ik%20spelen%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:600;color:#b3a9f0;">Speeladvies</a>
+        <a href="The%20Classy%20Gamer%20-%20Guides%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;">Guides</a>
+                <a href="The%20Classy%20Gamer%20-%20Mijn%20Backlog%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;">Mijn Backlog</a>
+                <a href="The%20Classy%20Gamer%20-%20Backlog%20Club%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;">Backlog Club</a>
+        <a href="The%20Classy%20Gamer%20-%20Community%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;">Community</a>
+      </nav>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:14px;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C4CBD6" stroke-width="2" style="cursor:pointer;"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <span style="font-family:'Inter';font-size:13.5px;font-weight:600;color:#fff;background:#6C5CE7;padding:9px 17px;border-radius:999px;display:inline-block;">Wat moet ik spelen?</span>
+      </div>
+      <details class="nav-burger" style="display:none;position:relative;margin-left:8px;">
+        <summary style="list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(247,245,237,0.18);border-radius:9px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F5ED" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </summary>
+        <div style="position:absolute;right:0;top:50px;background:#0b2038;border:1px solid rgba(247,245,237,0.14);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:2px;min-width:200px;box-shadow:0 24px 50px -20px rgba(0,0,0,0.8);z-index:60;">
+          <a href="The%20Classy%20Gamer%20-%20Home%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;padding:10px 12px;border-radius:8px;">Home</a>
+          <a href="The%20Classy%20Gamer%20-%20Reviewpagina.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;padding:10px 12px;border-radius:8px;">Reviews</a>
+                    <a href="The%20Classy%20Gamer%20-%20Discover%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;padding:10px 12px;border-radius:8px;">Discover</a>
+          <a href="The%20Classy%20Gamer%20-%20Wat%20moet%20ik%20spelen%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;padding:10px 12px;border-radius:8px;">Speeladvies</a>
+          <a href="The%20Classy%20Gamer%20-%20Guides%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;padding:10px 12px;border-radius:8px;">Guides</a>
+                    <a href="The%20Classy%20Gamer%20-%20Mijn%20Backlog%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;padding:10px 12px;border-radius:8px;">Mijn Backlog</a>
+                    <a href="The%20Classy%20Gamer%20-%20Backlog%20Club%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;padding:10px 12px;border-radius:8px;">Backlog Club</a>
+          <a href="The%20Classy%20Gamer%20-%20Community%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:500;color:#C4CBD6;padding:10px 12px;border-radius:8px;">Community</a>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <section style="max-width:760px;margin:0 auto;padding:60px 32px 0;text-align:center;">
+    <div style="font-family:'Inter';font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#b3a9f0;margin-bottom:14px;">De engine</div>
+    <h1 style="font-family:'Fraunces';font-weight:900;font-size:clamp(40px,6vw,72px);line-height:0.95;letter-spacing:-0.015em;color:#F7F5ED;margin:0 0 18px;">Wat moet ik spelen?</h1>
+    <p style="font-family:'Inter';font-size:18px;line-height:1.55;color:#C4CBD6;margin:0 auto;max-width:52ch;">Drie vragen. Geen hype, alleen een eerlijke match — inclusief waarom, zodat je precies weet wat je krijgt.</p>
+  </section>
+
+  <section style="max-width:760px;margin:0 auto;padding:36px 32px 0;">
+    <div style="position:relative;border-radius:22px;overflow:hidden;background:#0b2038;border:1px solid rgba(247,245,237,0.1);padding:36px 36px 40px;box-shadow:0 30px 60px -30px rgba(0,0,0,0.7);">
+      <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 85% 8%,rgba(124,92,255,0.16),transparent 55%);"></div>
+
+      <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px;">
+        <span style="font-family:'Inter';font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8fa0bb;">{{ stepLabel }}</span>
+        <div style="display:flex;gap:8px;">
+          <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="3">
+            <div style="width:26px;height:5px;border-radius:999px;background:{{ dot.col }};"></div>
+          </sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{ showQuestion }}" hint-placeholder-val="{{ true }}">
+        <div style="position:relative;">
+          <h2 style="font-family:'Fraunces';font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.08;color:#F7F5ED;margin:0 0 6px;">{{ qTitle }}</h2>
+          <p style="font-family:'Inter';font-size:14.5px;color:#8fa0bb;margin:0 0 24px;">{{ qSub }}</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+            <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
+              <button onClick="{{ o.onClick }}" style="text-align:left;cursor:pointer;background:rgba(247,245,237,0.04);border:1px solid rgba(247,245,237,0.14);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:5px;transition:all 0.15s;" style-hover="background:rgba(108,92,231,0.16);border:1px solid rgba(108,92,231,0.6);">
+                <span style="font-family:'Fraunces';font-weight:700;font-size:18px;color:#F7F5ED;line-height:1.15;">{{ o.label }}</span>
+                <span style="font-family:'Inter';font-size:13px;color:#8fa0bb;">{{ o.sub }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ back }}" style="margin-top:22px;background:none;border:none;cursor:pointer;font-family:'Inter';font-size:13.5px;font-weight:600;color:#8fa0bb;padding:0;">← Vorige vraag</button>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showResult }}" hint-placeholder-val="{{ false }}">
+        <div style="position:relative;">
+          <div style="font-family:'Inter';font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#b3a9f0;margin-bottom:16px;">Jouw match</div>
+
+          <div style="border-radius:18px;overflow:hidden;background:#06152C;border:1px solid rgba(247,245,237,0.12);padding:28px 28px;margin-bottom:24px;">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+              <span style="display:inline-flex;background:{{ primary.vbg }};color:{{ primary.vfg }};border:1px solid {{ primary.vborder }};font-family:'Inter';font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 13px;border-radius:999px;">{{ primary.verdict }}</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Inter';font-size:13px;font-weight:700;color:#8B7CFF;"><span style="font-size:20px;">{{ primary.match }}</span> match</span>
+            </div>
+            <h3 style="font-family:'Fraunces';font-weight:900;font-size:clamp(26px,4vw,38px);line-height:1.0;color:#F7F5ED;margin:0 0 6px;">{{ primary.title }}</h3>
+            <div style="font-family:'Inter';font-size:13px;font-weight:600;letter-spacing:0.04em;color:#8fa0bb;margin-bottom:16px;">{{ primary.meta }}</div>
+            <p style="font-family:'Inter';font-size:15.5px;line-height:1.6;color:#C4CBD6;margin:0 0 22px;max-width:54ch;">{{ primary.blurb }}</p>
+
+            <div style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8fa0bb;margin-bottom:12px;">Waarom deze match</div>
+            <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:24px;">
+              <sc-for list="{{ primary.reasons }}" as="r" hint-placeholder-count="3">
+                <span style="display:inline-flex;font-family:'Inter';font-size:13px;font-weight:600;padding:8px 14px;border-radius:10px;background:{{ r.bg }};color:{{ r.fg }};border:1px solid {{ r.border }};">{{ r.text }}</span>
+              </sc-for>
+            </div>
+
+            <div style="display:flex;flex-wrap:wrap;gap:12px;">
+              <a href="The%20Classy%20Gamer%20-%20Reviewpagina.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-family:'Inter';font-size:14.5px;font-weight:700;color:#fff;background:#6C5CE7;padding:14px 26px;border-radius:999px;">Lees de review →</a>
+              <button onClick="{{ primary.onAdd }}" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:'Inter';font-size:14.5px;font-weight:700;color:{{ primary.addFg }};background:{{ primary.addBg }};border:1px solid {{ primary.addBorder }};padding:14px 24px;border-radius:999px;">{{ primary.addLabel }}</button>
+            </div>
+          </div>
+
+          <div style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8fa0bb;margin-bottom:12px;">Ook de moeite waard</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:26px;">
+            <sc-for list="{{ alternates }}" as="alt" hint-placeholder-count="2">
+              <a href="The%20Classy%20Gamer%20-%20Reviewpagina.dc.html" style="display:flex;align-items:center;gap:16px;background:rgba(247,245,237,0.04);border:1px solid rgba(247,245,237,0.1);border-radius:14px;padding:16px 18px;">
+                <div style="flex:none;font-family:'Fraunces';font-weight:800;font-size:16px;color:#8B7CFF;width:44px;">{{ alt.match }}</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-family:'Fraunces';font-weight:700;font-size:17px;color:#F7F5ED;line-height:1.15;">{{ alt.title }}</div>
+                  <div style="font-family:'Inter';font-size:13px;color:#8fa0bb;">{{ alt.why }}</div>
+                </div>
+                <span style="flex:none;font-family:'Inter';font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#b3a9f0;">{{ alt.verdict }}</span>
+              </a>
+            </sc-for>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 20px;justify-content:space-between;background:rgba(108,92,231,0.1);border:1px solid rgba(108,92,231,0.4);border-radius:16px;padding:18px 22px;margin-bottom:22px;">
+            <div style="display:flex;align-items:flex-start;gap:14px;max-width:52ch;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#b3a9f0" stroke-width="1.8" style="flex:none;margin-top:2px;"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><path d="M12 12v5M9.5 14.5 12 12l2.5 2.5"/></svg>
+              <div>
+                <div style="font-family:'Inter';font-size:14.5px;font-weight:700;color:#F7F5ED;line-height:1.3;">Bewaar je backlog op al je apparaten</div>
+                <div style="font-family:'Inter';font-size:13px;color:#8fa0bb;line-height:1.5;margin-top:3px;">Nu opgeslagen op dit apparaat. Log in en vind je stapel overal terug — laptop, telefoon, de browser op je console.</div>
+              </div>
+            </div>
+            <button style="flex:none;cursor:pointer;font-family:'Inter';font-size:13.5px;font-weight:700;color:#fff;background:#6C5CE7;border:none;padding:12px 22px;border-radius:999px;">Log in om te syncen</button>
+          </div>
+          <button onClick="{{ restart }}" style="background:none;border:1px solid rgba(247,245,237,0.2);cursor:pointer;font-family:'Inter';font-size:13.5px;font-weight:600;color:#C4CBD6;padding:12px 22px;border-radius:999px;">↺ Opnieuw beginnen</button>
+        </div>
+      </sc-if>
+
+    </div>
+    <p style="text-align:center;font-family:'Inter';font-size:12.5px;color:#5b6b84;margin:18px 0 0;">Aanbevelingen komen uit reviews van The Curator — nooit gesponsord, nooit algoritmisch opgevuld.</p>
+  </section>
+
+  <footer style="background:#040E1E;margin-top:72px;">
+    <div style="max-width:1200px;margin:0 auto;padding:56px 32px 40px;">
+      <div style="display:flex;gap:48px;flex-wrap:wrap;justify-content:space-between;margin-bottom:44px;">
+        <div style="max-width:300px;">
+          <div style="font-family:'Fraunces';font-weight:700;font-size:22px;color:#F7F5ED;margin-bottom:10px;">The Classy Gamer</div>
+          <p style="font-family:'Caveat';font-size:27px;color:#b3a9f0;margin:0 0 18px;">Better games. More time.</p>
+          <div style="display:flex;gap:18px;font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.14em;color:#5b6b84;">
+            <span>DISCOVER</span><span>DECIDE</span><span>DISCUSS</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#5b6b84;margin-bottom:4px;">Ontdek</span>
+          <a href="The%20Classy%20Gamer%20-%20Reviewpagina.dc.html" style="font-family:'Inter';font-size:14px;color:#C4CBD6;">Reviews</a>
+                    <a href="The%20Classy%20Gamer%20-%20Discover%20C.dc.html" style="font-family:'Inter';font-size:14px;color:#C4CBD6;">Discover</a>
+          <a href="The%20Classy%20Gamer%20-%20Wat%20moet%20ik%20spelen%20C.dc.html" style="font-family:'Inter';font-size:14px;color:#C4CBD6;">Speeladvies</a>
+          <a href="The%20Classy%20Gamer%20-%20Guides%20C.dc.html" style="font-family:'Inter';font-size:14px;color:#C4CBD6;">Guides</a>
+                    <a href="The%20Classy%20Gamer%20-%20Mijn%20Backlog%20C.dc.html" style="font-family:'Inter';font-size:14px;color:#C4CBD6;">Mijn Backlog</a>
+                    <a href="The%20Classy%20Gamer%20-%20Backlog%20Club%20C.dc.html" style="font-family:'Inter';font-size:14px;color:#C4CBD6;">Backlog Club</a>
+          <a href="The%20Classy%20Gamer%20-%20Community%20C.dc.html" style="font-family:'Inter';font-size:14px;color:#C4CBD6;">Community</a>
+        </div>
+        <div style="max-width:300px;flex:1;min-width:250px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <div style="width:44px;height:44px;border-radius:50%;background:#6C5CE7;flex:none;display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-weight:700;color:#fff;font-size:18px;">C</div>
+            <div>
+              <div style="font-family:'Fraunces';font-weight:700;font-size:18px;color:#F7F5ED;line-height:1.1;">The Curator</div>
+              <div style="font-family:'Inter';font-size:12px;color:#5b6b84;">Onafhankelijk · nooit gesponsord</div>
+            </div>
+          </div>
+          <p style="font-family:'Inter';font-size:13.5px;line-height:1.55;color:#8fa0bb;margin:0 0 12px;">Eén mens die eerlijk zegt of een game je tijd waard is. Kwaliteit boven hype.</p>
+          <a href="The%20Classy%20Gamer%20-%20Zo%20beoordeel%20ik%20C.dc.html" style="font-family:'Inter';font-size:14px;font-weight:600;color:#b3a9f0;">Zo beoordeel ik →</a>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(247,245,237,0.1);padding-top:22px;font-family:'Inter';font-size:12px;color:#5b6b84;">© 2026 The Classy Gamer</div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { step: 0, answers: {}, added: {} };
+
+  parseHours(h) { const m = String(h).match(/\d+/); return m ? parseInt(m[0], 10) : 0; }
+
+  addToBacklog = (g) => {
+    try {
+      const arr = JSON.parse(localStorage.getItem('tcg_backlog') || '[]');
+      if (!arr.some(x => x.title === g.title)) {
+        arr.push({ id: 'eng-' + Date.now(), title: g.title, genre: g.genre, hours: this.parseHours(g.hours), verdict: g.verdict });
+        localStorage.setItem('tcg_backlog', JSON.stringify(arr));
+      }
+    } catch (e) {}
+    this.setState(s => ({ added: { ...s.added, [g.title]: true } }));
+  };
+
+  get questions() {
+    return [
+      { key: 'mood', title: 'Waar ben je vanavond voor in de stemming?', sub: 'Kies wat het dichtst in de buurt komt.', opts: [
+        { v: 'story', label: 'Verhaal & sfeer', sub: 'Meeslepen, personages, wereld' },
+        { v: 'challenge', label: 'Uitdaging & mastery', sub: 'Vaardigheid, spanning, triomf' },
+        { v: 'explore', label: 'Ontdekken & verkennen', sub: 'Nieuwsgierigheid, geheimen' },
+        { v: 'relax', label: 'Ontspannen', sub: 'Rustig tempo, geen druk' },
+      ]},
+      { key: 'time', title: 'Hoeveel tijd heb je?', sub: 'Eerlijk zijn helpt de match.', opts: [
+        { v: 'short', label: 'Een avondje', sub: 'Onder de 15 uur' },
+        { v: 'mid', label: 'Een paar weken', sub: '15 – 40 uur' },
+        { v: 'long', label: 'Een grote reis', sub: '40 uur en meer' },
+      ]},
+      { key: 'diff', title: 'Hoeveel moeite mag het kosten?', sub: 'Er is geen fout antwoord.', opts: [
+        { v: 'easy', label: 'Toegankelijk', sub: 'Ik wil vooral genieten' },
+        { v: 'medium', label: 'Pittig maar eerlijk', sub: 'Een gezonde uitdaging' },
+        { v: 'hard', label: 'Breek me maar', sub: 'Geef me je zwaarste' },
+      ]},
+    ];
+  }
+
+  get games() {
+    return [
+      { title: 'Outer Wilds', genre: 'Mystery / Exploratie', hours: '~15u', time: 'short', diff: 'medium', mood: ['explore', 'story'], verdict: 'WORTH YOUR TIME', gem: false, blurb: 'Een zonnestelsel-mysterie dat je maar \u00e9\u00e9n keer voor het eerst kunt ontrafelen. Pure nieuwsgierigheid als spelmechaniek.', pos: ['+ wereld om te ontrafelen', '+ beloont nieuwsgierigheid'] },
+      { title: 'Hades', genre: 'Roguelike / Action', hours: '~25u', time: 'short', diff: 'hard', mood: ['challenge', 'relax'], verdict: 'WORTH YOUR TIME', gem: false, blurb: 'Verslavend en eindeloos herspeelbaar. Elke run duurt twintig minuten en vertelt zijn eigen verhaal.', pos: ['+ perfecte korte sessies', '+ elke run een verhaal'] },
+      { title: 'Disco Elysium', genre: 'RPG / Narratief', hours: '~30u', time: 'mid', diff: 'easy', mood: ['story'], verdict: 'WORTH YOUR TIME', gem: false, blurb: 'Het beste schrijfwerk in games, punt. Een detectiveverhaal waarin bijna elke keuze telt.', pos: ['+ onge\u00ebvenaard schrijfwerk', '+ keuzes tellen echt'] },
+      { title: 'Elden Ring', genre: 'Action RPG', hours: '80u+', time: 'long', diff: 'hard', mood: ['challenge', 'explore'], verdict: 'WORTH YOUR TIME', gem: false, blurb: 'Onvergeeflijk, maar geen enkele open wereld nodigt zo sterk uit tot ontdekken. Een reis van tientallen uren.', pos: ['+ enorme wereld', '+ diepe uitdaging'] },
+      { title: 'Stardew Valley', genre: 'Sim / Cozy', hours: '60u+', time: 'long', diff: 'easy', mood: ['relax'], verdict: 'WORTH YOUR TIME', gem: false, blurb: 'Eindeloos ontspannend. Bouw je boerderij op je eigen tempo, zonder ooit gehaast te worden.', pos: ['+ eindeloos ontspannend', '+ jouw tempo'] },
+      { title: 'Pentiment', genre: 'Narratief / Historisch', hours: '~20u', time: 'mid', diff: 'easy', mood: ['story', 'explore'], verdict: 'HIDDEN GEM', gem: true, blurb: 'Een middeleeuws moordmysterie dat aanvoelt als een levend handschrift. Onterecht door bijna iedereen gemist.', pos: ['+ uniek handschrift-verhaal', '+ levende middeleeuwen'] },
+    ];
+  }
+
+  score(g, a) {
+    const order = { short: 0, mid: 1, long: 2, easy: 0, medium: 1, hard: 2 };
+    let s = 0;
+    if (a.mood && g.mood.includes(a.mood)) s += 3;
+    if (a.time) { const d = Math.abs(order[g.time] - order[a.time]); s += d === 0 ? 2 : d === 1 ? 1 : 0; }
+    if (a.diff) { const d = Math.abs(order[g.diff] - order[a.diff]); s += d === 0 ? 2 : d === 1 ? 1 : 0; }
+    return s;
+  }
+
+  matchPct(g, a) { return Math.min(97, 71 + this.score(g, a) * 3) + '%'; }
+
+  reasons(g, a) {
+    const pos = { bg: 'rgba(108,92,231,0.16)', fg: '#b3a9f0', border: 'rgba(108,92,231,0.5)' };
+    const neg = { bg: 'rgba(247,245,237,0.05)', fg: '#8fa0bb', border: 'rgba(247,245,237,0.16)' };
+    const out = g.pos.slice(0, 2).map(t => ({ text: t, ...pos }));
+    let ctx;
+    if (g.time === 'long' && a.time === 'short') ctx = { text: '\u2212 vraagt meer tijd dan je hebt', ...neg };
+    else if (g.time === 'short' && a.time === 'long') ctx = { text: '\u2212 korter dan je zocht', ...neg };
+    else if (a.mood && !g.mood.includes(a.mood)) ctx = { text: '\u2212 andere sfeer dan je koos', ...neg };
+    else ctx = { text: '+ past bij je tijd', ...pos };
+    out.push(ctx);
+    return out;
+  }
+
+  choose = (v) => this.setState(s => {
+    const key = this.questions[s.step].key;
+    return { answers: { ...s.answers, [key]: v }, step: s.step + 1 };
+  });
+  back = () => this.setState(s => ({ step: Math.max(0, s.step - 1) }));
+  restart = () => this.setState({ step: 0, answers: {} });
+
+  renderVals() {
+    const total = this.questions.length;
+    const step = this.state.step;
+    const a = this.state.answers;
+    const showResult = step >= total;
+
+    const dots = this.questions.map((q, i) => ({
+      col: i < step ? '#6C5CE7' : i === step ? '#8B7CFF' : 'rgba(247,245,237,0.14)'
+    }));
+
+    let qTitle = '', qSub = '', options = [];
+    if (!showResult) {
+      const q = this.questions[step];
+      qTitle = q.title; qSub = q.sub;
+      options = q.opts.map(o => ({ label: o.label, sub: o.sub, onClick: () => this.choose(o.v) }));
+    }
+
+    let primary = null, alternates = [];
+    if (showResult) {
+      const ranked = this.games
+        .map(g => ({ g, sc: this.score(g, a) }))
+        .sort((x, y) => y.sc - x.sc)
+        .map(x => x.g);
+      const top = ranked[0];
+      primary = {
+        title: top.title,
+        meta: top.genre + ' · ' + top.hours,
+        blurb: top.blurb,
+        match: this.matchPct(top, a),
+        verdict: top.verdict,
+        vbg: top.gem ? 'rgba(108,92,231,0.16)' : '#6C5CE7',
+        vfg: top.gem ? '#b3a9f0' : '#fff',
+        vborder: top.gem ? 'rgba(108,92,231,0.55)' : '#6C5CE7',
+        reasons: this.reasons(top, a),
+        onAdd: () => this.addToBacklog(top),
+        addLabel: this.state.added[top.title] ? 'Op je backlog gezet ✓' : '+ Zet op mijn backlog',
+        addBg: this.state.added[top.title] ? 'rgba(63,191,143,0.14)' : 'rgba(247,245,237,0.05)',
+        addFg: this.state.added[top.title] ? '#5fd6a8' : '#F7F5ED',
+        addBorder: this.state.added[top.title] ? 'rgba(63,191,143,0.5)' : 'rgba(247,245,237,0.2)',
+      };
+      alternates = ranked.slice(1, 3).map(g => ({
+        title: g.title,
+        match: this.matchPct(g, a),
+        verdict: g.verdict,
+        why: g.pos[0].replace('+ ', '') + ' · ' + g.hours,
+      }));
+    }
+
+    return {
+      stepLabel: showResult ? 'Klaar' : ('Vraag ' + (step + 1) + ' van ' + total),
+      dots, showQuestion: !showResult, showResult,
+      qTitle, qSub, options, showBack: step > 0 && !showResult,
+      primary, alternates,
+      choose: this.choose, back: this.back, restart: this.restart,
+    };
+  }
+}
+</script>
+</body>
+</html>

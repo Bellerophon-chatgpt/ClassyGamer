@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{background:#F4EFE6;color:#1C1B38;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;}
+  a{color:#4E4FA6;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
+  a:hover{color:#7D80D4;}
+  ::selection{background:#7D80D4;color:#fff;}
+</style>
+</helmet>
+
+<div style="min-height:100vh;">
+
+  <header style="position:sticky;top:0;z-index:20;background:rgba(244,239,230,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(28,27,56,0.14);">
+    <div style="max-width:1080px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:baseline;gap:10px;">
+        <span style="font-family:'Archivo';font-weight:900;font-size:20px;letter-spacing:-0.01em;color:#1C1B38;">The Classy Gamer</span>
+        <span style="font-family:'Inter';font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4E4FA6;">Merkkit</span>
+      </div>
+      <nav style="display:flex;gap:6px;">
+        <button onClick="{{ goBrand }}" style="font-family:'Inter';font-weight:600;font-size:13px;padding:8px 15px;border-radius:999px;border:1px solid #4E4FA6;cursor:pointer;background:{{ brandBg }};color:{{ brandFg }};transition:background .15s,color .15s;">Brand Board</button>
+        <button onClick="{{ goCard }}" style="font-family:'Inter';font-weight:600;font-size:13px;padding:8px 15px;border-radius:999px;border:1px solid #4E4FA6;cursor:pointer;background:{{ cardBg }};color:{{ cardFg }};transition:background .15s,color .15s;">Scorekaart</button>
+        <button onClick="{{ goReview }}" style="font-family:'Inter';font-weight:600;font-size:13px;padding:8px 15px;border-radius:999px;border:1px solid #4E4FA6;cursor:pointer;background:{{ reviewBg }};color:{{ reviewFg }};transition:background .15s,color .15s;">Review-voorbeeld</button>
+      </nav>
+    </div>
+  </header>
+
+  <sc-if value="{{ isBrand }}" hint-placeholder-val="{{ true }}">
+  <main style="max-width:1080px;margin:0 auto;padding:56px 28px 96px;">
+
+    <div style="display:flex;gap:40px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:64px;">
+      <div style="flex:1;min-width:280px;">
+        <div style="font-family:'Inter';font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#4E4FA6;margin-bottom:18px;">Identiteit — The Classy Gamer</div>
+        <h1 style="font-family:'Archivo';font-weight:900;font-size:clamp(40px,7vw,72px);line-height:0.95;letter-spacing:-0.02em;margin:0 0 20px;color:#1C1B38;">The Classy<br>Gamer</h1>
+        <p style="font-family:'Archivo';font-weight:600;font-size:clamp(18px,2.4vw,24px);color:#4E4FA6;margin:0 0 14px;">"Worth your time?"</p>
+        <p style="max-width:44ch;font-size:15px;color:#56546A;margin:0;">Een keurmerk. Door een mens getest en goedgekeurd — of afgekeurd. Elke review sluit af met het zegel. Stellig, betrouwbaar, een tikje eigenwijs, warm gehouden door je stem.</p>
+      </div>
+      <div style="position:relative;width:236px;height:236px;flex:none;transform:rotate(-7deg);">
+        <div style="position:absolute;inset:0;border:3px solid #1C1B38;border-radius:50%;"></div>
+        <div style="position:absolute;inset:11px;border:6px double #1C1B38;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#1C1B38;padding:16px;">
+          <div style="font-family:'Archivo';font-weight:700;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;">The Classy Gamer</div>
+          <div style="width:64%;height:1px;background:#1C1B38;opacity:0.45;margin:10px 0;"></div>
+          <div style="font-family:'Archivo';font-weight:900;font-size:37px;letter-spacing:0.02em;line-height:0.9;">GEKEURD</div>
+          <div style="width:64%;height:1px;background:#1C1B38;opacity:0.45;margin:10px 0;"></div>
+          <div style="font-family:'Archivo';font-weight:600;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:#4E4FA6;">★ Door een mens getest ★</div>
+        </div>
+      </div>
+    </div>
+
+    <section style="margin-bottom:64px;">
+      <h2 style="font-family:'Archivo';font-weight:800;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#1C1B38;border-bottom:2px solid #1C1B38;padding-bottom:10px;margin:0 0 24px;">Kleurenpalet</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;">
+        <div style="border:1px solid rgba(28,27,56,0.14);border-radius:10px;overflow:hidden;background:#fff;">
+          <div style="height:96px;background:#1C1B38;"></div>
+          <div style="padding:12px 14px;"><div style="font-family:'Archivo';font-weight:700;font-size:14px;">Navy-inkt</div><div style="font-family:'Inter';font-size:12px;color:#56546A;">Tekst · woordmerk</div><div style="font-family:'Inter';font-size:12px;font-weight:600;margin-top:4px;letter-spacing:0.03em;">#1C1B38</div></div>
+        </div>
+        <div style="border:1px solid rgba(28,27,56,0.14);border-radius:10px;overflow:hidden;background:#fff;">
+          <div style="height:96px;background:#15142E;"></div>
+          <div style="padding:12px 14px;"><div style="font-family:'Archivo';font-weight:700;font-size:14px;">Diep indigo</div><div style="font-family:'Inter';font-size:12px;color:#56546A;">Donkere vlakken · hero</div><div style="font-family:'Inter';font-size:12px;font-weight:600;margin-top:4px;letter-spacing:0.03em;">#15142E</div></div>
+        </div>
+        <div style="border:1px solid rgba(28,27,56,0.14);border-radius:10px;overflow:hidden;background:#fff;">
+          <div style="height:96px;background:#7D80D4;"></div>
+          <div style="padding:12px 14px;"><div style="font-family:'Archivo';font-weight:700;font-size:14px;">Periwinkle</div><div style="font-family:'Inter';font-size:12px;color:#56546A;">Accent · knoppen · zegel</div><div style="font-family:'Inter';font-size:12px;font-weight:600;margin-top:4px;letter-spacing:0.03em;">#7D80D4</div></div>
+        </div>
+        <div style="border:1px solid rgba(28,27,56,0.14);border-radius:10px;overflow:hidden;background:#fff;">
+          <div style="height:96px;background:#F4EFE6;border-bottom:1px solid rgba(28,27,56,0.1);"></div>
+          <div style="padding:12px 14px;"><div style="font-family:'Archivo';font-weight:700;font-size:14px;">Cream</div><div style="font-family:'Inter';font-size:12px;color:#56546A;">Achtergrond</div><div style="font-family:'Inter';font-size:12px;font-weight:600;margin-top:4px;letter-spacing:0.03em;">#F4EFE6</div></div>
+        </div>
+        <div style="border:1px solid rgba(28,27,56,0.14);border-radius:10px;overflow:hidden;background:#fff;">
+          <div style="height:96px;background:#C1443A;"></div>
+          <div style="padding:12px 14px;"><div style="font-family:'Archivo';font-weight:700;font-size:14px;">Alarmrood</div><div style="font-family:'Inter';font-size:12px;color:#56546A;">Afgekeurd · waarschuwing</div><div style="font-family:'Inter';font-size:12px;font-weight:600;margin-top:4px;letter-spacing:0.03em;">#C1443A</div></div>
+        </div>
+      </div>
+      <p style="font-family:'Inter';font-size:13px;color:#56546A;margin:16px 0 0;">Gebruik 1 hoofdkleur (navy-inkt) + 1 accent (periwinkle) consequent. Meer kleuren = minder herkenbaar.</p>
+    </section>
+
+    <section style="margin-bottom:64px;">
+      <h2 style="font-family:'Archivo';font-weight:800;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#1C1B38;border-bottom:2px solid #1C1B38;padding-bottom:10px;margin:0 0 24px;">Typografie</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+        <div style="background:#fff;border:1px solid rgba(28,27,56,0.14);border-radius:10px;padding:22px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;"><span style="font-family:'Archivo';font-weight:900;font-size:15px;">Archivo</span><span style="font-family:'Inter';font-size:11px;color:#56546A;letter-spacing:0.1em;text-transform:uppercase;">Display · koppen</span></div>
+          <div style="font-family:'Archivo';font-weight:900;font-size:40px;line-height:0.95;letter-spacing:-0.01em;">Worth your time?</div>
+          <div style="font-family:'Archivo';font-weight:600;font-size:16px;color:#56546A;margin-top:8px;">Regular 400 · Bold 700 · Black 900</div>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(28,27,56,0.14);border-radius:10px;padding:22px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;"><span style="font-family:'Inter';font-weight:700;font-size:15px;">Inter</span><span style="font-family:'Inter';font-size:11px;color:#56546A;letter-spacing:0.1em;text-transform:uppercase;">UI · labels</span></div>
+          <div style="font-family:'Inter';font-weight:600;font-size:19px;line-height:1.35;">Speeltijd, prijs-advies, voor wie. De vaste velden, strak en leesbaar op elk formaat.</div>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(28,27,56,0.14);border-radius:10px;padding:22px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;"><span style="font-family:'Source Serif 4';font-weight:600;font-size:16px;">Source Serif 4</span><span style="font-family:'Inter';font-size:11px;color:#56546A;letter-spacing:0.1em;text-transform:uppercase;">Artikel-tekst</span></div>
+          <div style="font-family:'Source Serif 4';font-weight:400;font-size:18px;line-height:1.5;">Voor de lange stukken: een serif die het "kwaliteitsjournalistiek"-gevoel geeft zonder plechtig te worden.</div>
+        </div>
+      </div>
+      <p style="font-family:'Inter';font-size:13px;color:#56546A;margin:16px 0 0;">Pairing: Archivo + Inter voor merk & UI (strak, confident); Source Serif 4 voor artikel-tekst. Twee gewichten per font volstaan.</p>
+    </section>
+
+    <section style="margin-bottom:64px;">
+      <h2 style="font-family:'Archivo';font-weight:800;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#1C1B38;border-bottom:2px solid #1C1B38;padding-bottom:10px;margin:0 0 24px;">Logo & zegel</h2>
+      <div style="display:flex;gap:36px;flex-wrap:wrap;align-items:center;">
+        <div style="position:relative;width:150px;height:150px;flex:none;transform:rotate(-7deg);">
+          <div style="position:absolute;inset:0;border:2px solid #1C1B38;border-radius:50%;"></div>
+          <div style="position:absolute;inset:8px;border:4px double #1C1B38;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#1C1B38;padding:10px;">
+            <div style="font-family:'Archivo';font-weight:900;font-size:24px;line-height:0.9;">GEKEURD</div>
+            <div style="font-family:'Archivo';font-weight:600;font-size:7px;letter-spacing:0.16em;text-transform:uppercase;margin-top:6px;color:#4E4FA6;">Getest & goed</div>
+          </div>
+        </div>
+        <div style="position:relative;width:150px;height:150px;flex:none;transform:rotate(6deg);">
+          <div style="position:absolute;inset:0;border:2px solid #C1443A;border-radius:50%;"></div>
+          <div style="position:absolute;inset:8px;border:4px double #C1443A;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#C1443A;padding:10px;">
+            <div style="font-family:'Archivo';font-weight:900;font-size:23px;line-height:0.9;">AFGE-<br>KEURD</div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:220px;font-family:'Inter';font-size:14px;color:#3a3852;">
+          <p style="margin:0 0 10px;">Het zegel is een <strong>stempel</strong> — cirkelvorm met het woord erin, alsof het op de game gestempeld is. Werkt klein (favicon, thumbnail-hoek) én groot.</p>
+          <p style="margin:0;">Houd het in één kleur werkbaar (voor watermerk op beeld). Het woordmerk "The Classy Gamer" staat in Archivo Black als vaste lockup ernaast, met "Worth your time?" als vaste vraag.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 style="font-family:'Archivo';font-weight:800;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#1C1B38;border-bottom:2px solid #1C1B38;padding-bottom:10px;margin:0 0 24px;">Thumbnail-regels</h2>
+      <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:28px;align-items:start;">
+        <div style="position:relative;aspect-ratio:16/9;border:6px solid #7D80D4;border-radius:8px;overflow:hidden;background:#15142E;">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#211f42 0 14px,#2a2850 14px 28px);"></div>
+          <div style="position:absolute;top:12px;left:14px;font-family:'Inter';font-size:11px;letter-spacing:0.1em;color:#8886b8;">game-screenshot</div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(to top,rgba(21,20,46,0.96),rgba(21,20,46,0));"></div>
+          <div style="position:absolute;right:14px;top:14px;width:78px;height:78px;transform:rotate(-8deg);"><div style="position:absolute;inset:0;border:2px solid #7D80D4;border-radius:50%;"></div><div style="position:absolute;inset:5px;border:3px double #7D80D4;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#7D80D4;font-family:'Archivo';font-weight:900;font-size:14px;text-align:center;line-height:0.85;">GE<br>KEURD</div></div>
+          <div style="position:absolute;left:24px;right:24px;bottom:22px;"><div style="font-family:'Archivo';font-weight:900;font-size:clamp(28px,5vw,52px);line-height:0.9;color:#F4EFE6;text-transform:uppercase;letter-spacing:-0.01em;">Nog het<br>waard?</div></div>
+        </div>
+        <ol style="margin:0;padding-left:20px;font-family:'Inter';font-size:14px;color:#3a3852;line-height:1.55;">
+          <li style="margin-bottom:10px;"><strong>Max 2–3 woorden.</strong> Enorm, hoog contrast.</li>
+          <li style="margin-bottom:10px;"><strong>Vaste tekstzone</strong> — elke keer onderin.</li>
+          <li style="margin-bottom:10px;"><strong>Zegel in een vaste hoek</strong> (rechtsboven).</li>
+          <li style="margin-bottom:10px;"><strong>Beeld = photo-mode-shot</strong>, donkere balk erachter.</li>
+          <li style="margin-bottom:10px;"><strong>Periwinkle kader</strong> rond elke thumbnail.</li>
+          <li><strong>Leesbaar op duimnagelgrootte.</strong> Ontwerp op 1280×720.</li>
+        </ol>
+      </div>
+      <p style="font-family:'Inter';font-size:13px;color:#56546A;margin:16px 0 0;">Vermijd rage-gezichten en schreeuwerige clickbait — je bent een vertrouwensmerk. Consistentie &gt; mooi.</p>
+    </section>
+
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isCard }}">
+  <main style="max-width:1080px;margin:0 auto;padding:56px 28px 96px;">
+    <div style="font-family:'Inter';font-size:12px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#4E4FA6;margin-bottom:14px;">De vaste beoordelingsstructuur</div>
+    <h1 style="font-family:'Archivo';font-weight:900;font-size:clamp(34px,5.5vw,52px);line-height:0.98;letter-spacing:-0.02em;margin:0 0 12px;">Redactionele scorekaart</h1>
+    <p style="max-width:60ch;font-size:15px;color:#56546A;margin:0 0 48px;">Elke review — video, artikel, carrousel — volgt exact dit skelet en deze kaart. Dat maakt je herkenbaar, houdt het solo-behapbaar en voedt de flywheel.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;">
+      <div>
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#1C1B38;margin:0 0 16px;">De vaste kaart</h2>
+        <div style="background:#fff;border:1px solid rgba(28,27,56,0.16);border-radius:12px;overflow:hidden;box-shadow:0 1px 0 rgba(28,27,56,0.04);">
+          <div style="background:#15142E;color:#F4EFE6;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:'Archivo';font-weight:800;font-size:15px;letter-spacing:0.02em;">The Witcher 3</span>
+            <span style="font-family:'Inter';font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;opacity:0.85;">Scorekaart</span>
+          </div>
+          <div style="padding:6px 20px 14px;">
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid rgba(28,27,56,0.08);"><span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Speeltijd</span><span style="font-family:'Inter';font-size:14px;font-weight:500;text-align:right;">~50u verhaal · 100–150u+ volledig</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid rgba(28,27,56,0.08);"><span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Beste versie</span><span style="font-family:'Inter';font-size:14px;font-weight:500;text-align:right;">Complete Edition, next-gen update</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid rgba(28,27,56,0.08);"><span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Prijs-advies</span><span style="font-family:'Inter';font-size:14px;font-weight:500;text-align:right;">Wacht op de sale (staat vaak zeer laag)</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid rgba(28,27,56,0.08);"><span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Voor wie</span><span style="font-family:'Inter';font-size:14px;font-weight:500;text-align:right;">Verhaal, sfeer, grote werelden</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid rgba(28,27,56,0.08);"><span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Eindoordeel</span><span style="font-family:'Archivo';font-size:14px;font-weight:800;text-align:right;padding:5px 12px;border-radius:999px;color:#fff;background:{{ sealColor }};">{{ verdict }}</span></div>
+            <div style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;"><span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Hoe verkregen</span><span style="font-family:'Inter';font-size:14px;font-weight:500;text-align:right;">Zelf gekocht · getest op pc</span></div>
+          </div>
+        </div>
+        <p style="font-family:'Inter';font-size:12px;color:#56546A;margin:12px 2px 0;">Zelfde kader in elk artikel, als video-overlay én als carrousel-slide.</p>
+      </div>
+
+      <div>
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#1C1B38;margin:0 0 16px;">Het verdict-systeem</h2>
+        <p style="font-family:'Inter';font-size:13px;color:#56546A;margin:0 0 16px;">Vier heldere tiers in woorden. Duidelijker dan een 7,5 en moeilijker uit context te trekken.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:14px;align-items:center;background:#fff;border:1px solid rgba(28,27,56,0.14);border-left:5px solid #1C1B38;border-radius:8px;padding:14px 16px;"><span style="font-family:'Archivo';font-weight:900;font-size:20px;color:#1C1B38;width:22px;flex:none;">1</span><div><div style="font-family:'Archivo';font-weight:800;font-size:16px;">Spelen</div><div style="font-family:'Inter';font-size:13px;color:#56546A;">Gewoon doen — dit is je tijd waard. <em>On-brand: Gekeurd.</em></div></div></div>
+          <div style="display:flex;gap:14px;align-items:center;background:#fff;border:1px solid rgba(28,27,56,0.14);border-left:5px solid #4E4FA6;border-radius:8px;padding:14px 16px;"><span style="font-family:'Archivo';font-weight:900;font-size:20px;color:#4E4FA6;width:22px;flex:none;">2</span><div><div style="font-family:'Archivo';font-weight:800;font-size:16px;">Spelen — in de sale</div><div style="font-family:'Inter';font-size:13px;color:#56546A;">Goed, maar wacht op een prijsdaling. <em>On-brand: Gekeurd, in de sale.</em></div></div></div>
+          <div style="display:flex;gap:14px;align-items:center;background:#fff;border:1px solid rgba(28,27,56,0.14);border-left:5px solid #7D80D4;border-radius:8px;padding:14px 16px;"><span style="font-family:'Archivo';font-weight:900;font-size:20px;color:#7D80D4;width:22px;flex:none;">3</span><div><div style="font-family:'Archivo';font-weight:800;font-size:16px;">Voor de liefhebber</div><div style="font-family:'Inter';font-size:13px;color:#56546A;">Alleen als je bij "voor wie wél" hoort. <em>On-brand: Voorwaardelijk gekeurd.</em></div></div></div>
+          <div style="display:flex;gap:14px;align-items:center;background:#fff;border:1px solid rgba(28,27,56,0.14);border-left:5px solid #C1443A;border-radius:8px;padding:14px 16px;"><span style="font-family:'Archivo';font-weight:900;font-size:20px;color:#C1443A;width:22px;flex:none;">4</span><div><div style="font-family:'Archivo';font-weight:800;font-size:16px;">Overslaan</div><div style="font-family:'Inter';font-size:13px;color:#56546A;">Niet je tijd waard — en ik leg eerlijk uit waarom. <em>On-brand: Afgekeurd.</em></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;margin-top:56px;">
+      <div>
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#1C1B38;margin:0 0 16px;">Het vaste sectie-skelet</h2>
+        <ol style="margin:0;padding:0;list-style:none;">
+          <li style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(28,27,56,0.08);font-family:'Inter';font-size:14px;"><span style="font-family:'Archivo';font-weight:800;color:#4E4FA6;min-width:20px;">1</span><span><strong>In het kort</strong> — het oordeel in één alinea, bovenaan.</span></li>
+          <li style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(28,27,56,0.08);font-family:'Inter';font-size:14px;"><span style="font-family:'Archivo';font-weight:800;color:#4E4FA6;min-width:20px;">2</span><span><strong>Waarom nu</strong> — context/actualiteit, kort.</span></li>
+          <li style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(28,27,56,0.08);font-family:'Inter';font-size:14px;"><span style="font-family:'Archivo';font-weight:800;color:#4E4FA6;min-width:20px;">3</span><span><strong>Hoe speel je het</strong> — versies, platform, prijs/waarde.</span></li>
+          <li style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(28,27,56,0.08);font-family:'Inter';font-size:14px;"><span style="font-family:'Archivo';font-weight:800;color:#4E4FA6;min-width:20px;">4</span><span><strong>Wat werkt</strong> — concrete voorbeelden, in jouw stem.</span></li>
+          <li style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(28,27,56,0.08);font-family:'Inter';font-size:14px;"><span style="font-family:'Archivo';font-weight:800;color:#4E4FA6;min-width:20px;">5</span><span><strong>Wat z'n leeftijd verraadt</strong> — de eerlijke min.</span></li>
+          <li style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(28,27,56,0.08);font-family:'Inter';font-size:14px;"><span style="font-family:'Archivo';font-weight:800;color:#4E4FA6;min-width:20px;">6</span><span><strong>Tijd &amp; geld</strong> — investering en waarde.</span></li>
+          <li style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(28,27,56,0.08);font-family:'Inter';font-size:14px;"><span style="font-family:'Archivo';font-weight:800;color:#4E4FA6;min-width:20px;">7</span><span><strong>Voor wie wél, voor wie niet</strong> — je handtekening-moment.</span></li>
+          <li style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(28,27,56,0.08);font-family:'Inter';font-size:14px;"><span style="font-family:'Archivo';font-weight:800;color:#4E4FA6;min-width:20px;">8</span><span><strong>Eindoordeel</strong> — de tier.</span></li>
+          <li style="display:flex;gap:14px;padding:10px 0;font-family:'Inter';font-size:14px;"><span style="font-family:'Archivo';font-weight:800;color:#4E4FA6;min-width:20px;">9</span><span><strong>Transparantie</strong> — hoe verkregen, geen sponsoring, link naar het statuut.</span></li>
+        </ol>
+      </div>
+      <div>
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#1C1B38;margin:0 0 16px;">De review-regels</h2>
+        <div style="background:#15142E;color:#F4EFE6;border-radius:12px;padding:22px 24px;">
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-family:'Inter';font-size:14px;line-height:1.45;">
+            <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#7D80D4;font-family:'Archivo';font-weight:900;">·</span>Minimale speeltijd vóór een oordeel — waar het uitmaakt, noem ik hoeveel.</li>
+            <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#7D80D4;font-family:'Archivo';font-weight:900;">·</span>Altijd melden hoe ik de game kreeg (zelf gekocht / review copy).</li>
+            <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#7D80D4;font-family:'Archivo';font-weight:900;">·</span>Nooit een review van een game waarvan de uitgever mij in dezelfde periode sponsort.</li>
+            <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#7D80D4;font-family:'Archivo';font-weight:900;">·</span>Her-beoordelingsbeleid: grote updates kunnen een oordeel veranderen; ik werk de review bij met datum.</li>
+            <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#7D80D4;font-family:'Archivo';font-weight:900;">·</span>Correcties zichtbaar, feiten en meningen gescheiden, bronnen benoemd waar relevant.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isReview }}">
+  <main style="max-width:1080px;margin:0 auto;padding:36px 28px 96px;">
+
+    <div style="position:relative;border-radius:16px;overflow:hidden;min-height:400px;display:flex;flex-direction:column;justify-content:flex-end;background:#15142E;margin-bottom:44px;">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#211f42 0 16px,#2a2850 16px 32px);"></div>
+      <div style="position:absolute;top:16px;right:18px;font-family:'Inter';font-size:11px;letter-spacing:0.1em;color:#8886b8;">game-screenshot · photo mode</div>
+      <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(21,20,46,0.9) 0%,rgba(21,20,46,0.55) 45%,rgba(21,20,46,0.15) 100%);"></div>
+      <div style="position:absolute;top:18px;left:20px;display:inline-flex;align-items:center;gap:8px;background:#7D80D4;color:#fff;font-family:'Archivo';font-weight:800;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;padding:8px 14px;border-radius:999px;">{{ verdictPill }}</div>
+      <div style="position:relative;padding:36px 40px 34px;max-width:640px;">
+        <h1 style="font-family:'Archivo';font-weight:900;font-size:clamp(36px,5.5vw,58px);line-height:0.96;letter-spacing:-0.02em;color:#F7F4EE;margin:0 0 16px;">The Witcher 3:<br>Wild Hunt</h1>
+        <p style="font-family:'Inter';font-size:16px;line-height:1.5;color:#D9D7EA;margin:0 0 22px;max-width:52ch;">Een game die je niet alleen speelt, maar beleeft. Maar is hij na al die jaren nog steeds jouw tijd waard?</p>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:34px;height:34px;border-radius:50%;background:#7D80D4;display:flex;align-items:center;justify-content:center;font-family:'Archivo';font-weight:800;color:#fff;font-size:13px;">TC</div>
+            <span style="font-family:'Inter';font-size:13px;color:#C9C7DE;">Door <strong style="color:#F4EFE6;">The Curator</strong> · 12 apr 2025 · 12 min leestijd</span>
+          </div>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+            <span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#F4EFE6;border:1px solid rgba(244,239,230,0.5);padding:5px 12px;border-radius:999px;">RPG</span>
+            <button style="font-family:'Inter';font-size:12px;font-weight:600;color:#F4EFE6;background:rgba(244,239,230,0.12);border:1px solid rgba(244,239,230,0.3);padding:6px 13px;border-radius:999px;cursor:pointer;">Bewaar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:44px;flex-wrap:wrap;align-items:flex-start;">
+
+      <article style="flex:1 1 380px;min-width:300px;">
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:25px;margin:0 0 12px;color:#1C1B38;">Wat is het?</h2>
+        <p style="font-family:{{ articleFont }};font-size:18px;line-height:1.62;margin:0 0 30px;color:#2a2842;">The Witcher 3: Wild Hunt is een openworld-RPG waarin je de rol speelt van Geralt van Rivia, een monsterjager op zoek naar zijn geadopteerde dochter. Het spel staat bekend om zijn meeslepende verhaal, rijke wereld en memorabele personages.</p>
+
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:25px;margin:0 0 12px;color:#1C1B38;">Waarom zou ik dit spelen?</h2>
+        <p style="font-family:{{ articleFont }};font-size:18px;line-height:1.62;margin:0 0 30px;color:#2a2842;">De wereld voelt echt aan, de keuzes hebben impact en de missies zijn niet alleen maar lijstjes. Dit is een game die je blijft verrassen — zelfs na tientallen uren. Een "vind het vermiste varken"-klus draait zomaar uit op een echt moreel dilemma.</p>
+
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:25px;margin:0 0 12px;color:#1C1B38;">Wat zijn de nadelen?</h2>
+        <p style="font-family:{{ articleFont }};font-size:18px;line-height:1.62;margin:0 0 28px;color:#2a2842;">De combat voelt soms wat ouder aan, en de game kan in het begin overweldigend zijn. Daarnaast is het duidelijk dat het een oudere game is, wat je soms terugziet in de graphics en animaties.</p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;background:#fff;border:1px solid rgba(28,27,56,0.14);border-radius:12px;padding:18px 20px;margin:0 0 34px;">
+          <div style="display:flex;flex-direction:column;gap:6px;min-width:84px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#56546A;">Speelduur</span>
+            <span style="font-family:'Inter';font-size:13px;font-weight:600;color:#1C1B38;">50 – 150 uur</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;min-width:70px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="1.7"><rect x="7" y="7" width="10" height="10" rx="1" transform="rotate(45 12 12)"/></svg>
+            <span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#56546A;">Genre</span>
+            <span style="font-family:'Inter';font-size:13px;font-weight:600;color:#1C1B38;">RPG</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;min-width:88px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="1.7"><rect x="4" y="13" width="3.5" height="7" rx="1"/><rect x="10.2" y="9" width="3.5" height="11" rx="1"/><rect x="16.4" y="5" width="3.5" height="15" rx="1"/></svg>
+            <span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#56546A;">Moeilijkheid</span>
+            <span style="font-family:'Inter';font-size:13px;font-weight:600;color:#1C1B38;">Gemiddeld</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;min-width:88px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="1.7"><path d="M5 6l14 12M19 6L5 18" style="display:none"/><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>
+            <span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#56546A;">Singleplayer</span>
+            <span style="font-family:'Inter';font-size:13px;font-weight:600;color:#1C1B38;">Ja</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;min-width:84px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C1443A" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7"/></svg>
+            <span style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#56546A;">Multiplayer</span>
+            <span style="font-family:'Inter';font-size:13px;font-weight:600;color:#1C1B38;">Nee</span>
+          </div>
+        </div>
+
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:25px;margin:0 0 12px;color:#1C1B38;">Voor wie is het?</h2>
+        <p style="font-family:{{ articleFont }};font-size:18px;line-height:1.62;margin:0 0 30px;color:#2a2842;">Voor iedereen die houdt van sterke verhalen, een levende wereld en vrijheid om je eigen pad te kiezen. Als je urenlang wilt wegzakken in een sfeervolle wereld, zit je hier goed.</p>
+
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:25px;margin:0 0 12px;color:#1C1B38;">Voor wie is het niet?</h2>
+        <p style="font-family:{{ articleFont }};font-size:18px;line-height:1.62;margin:0 0 34px;color:#2a2842;">Als je vooral op zoek bent naar snelle actie of moderne graphics, is dit misschien niet de beste keuze. Dan verslaan andere games dit op hun eigen terrein.</p>
+
+        <div style="background:#15142E;color:#F4EFE6;border-radius:14px;padding:28px 30px;margin:0 0 40px;">
+          <div style="font-family:'Archivo';font-weight:800;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#7D80D4;margin-bottom:10px;">Ons oordeel</div>
+          <p style="font-family:'Source Serif 4';font-size:19px;line-height:1.55;margin:0 0 20px;">The Witcher 3 is niet zomaar een goede game. Het is een ervaring die je bijblijft. Ondanks zijn leeftijd — en kleine minpunten — blijft het een van de meest indrukwekkende RPG's ooit gemaakt.</p>
+          <div style="display:inline-flex;align-items:center;gap:9px;background:#7D80D4;color:#fff;font-family:'Archivo';font-weight:800;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:11px 20px;border-radius:999px;">{{ verdictPill }}</div>
+        </div>
+
+        <h2 style="font-family:'Archivo';font-weight:800;font-size:16px;letter-spacing:0.02em;margin:0 0 18px;color:#1C1B38;">Ook interessant</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;">
+          <a href="#" style="text-decoration:none;color:inherit;">
+            <div style="aspect-ratio:4/3;border-radius:10px;background:repeating-linear-gradient(135deg,#211f42 0 12px,#2a2850 12px 24px);margin-bottom:10px;"></div>
+            <div style="font-family:'Archivo';font-weight:700;font-size:14px;line-height:1.2;color:#1C1B38;margin-bottom:6px;">7 games als je The Witcher 3 mist</div>
+            <span style="font-family:'Inter';font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4E4FA6;">Recommendations</span>
+          </a>
+          <a href="#" style="text-decoration:none;color:inherit;">
+            <div style="aspect-ratio:4/3;border-radius:10px;background:repeating-linear-gradient(135deg,#211f42 0 12px,#2a2850 12px 24px);margin-bottom:10px;"></div>
+            <div style="font-family:'Archivo';font-weight:700;font-size:14px;line-height:1.2;color:#1C1B38;margin-bottom:6px;">De beste RPG's voor je backlog</div>
+                        <span style="font-family:'Inter';font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4E4FA6;">Discover</span>
+            <span style="font-family:'Inter';font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4E4FA6;">Speeladvies</span>
+          </a>
+          <a href="#" style="text-decoration:none;color:inherit;">
+            <div style="aspect-ratio:4/3;border-radius:10px;background:repeating-linear-gradient(135deg,#211f42 0 12px,#2a2850 12px 24px);margin-bottom:10px;"></div>
+            <div style="font-family:'Archivo';font-weight:700;font-size:14px;line-height:1.2;color:#1C1B38;margin-bottom:6px;">Waarom oude games soms beter zijn</div>
+            <span style="font-family:'Inter';font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4E4FA6;">Opinie</span>
+          </a>
+        </div>
+      </article>
+
+      <aside style="flex:1 1 260px;max-width:320px;min-width:250px;display:flex;flex-direction:column;gap:22px;position:sticky;top:80px;">
+
+        <div style="border:2px solid #7D80D4;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;background:#fff;">
+          <div style="width:40px;height:40px;border-radius:50%;background:#7D80D4;display:flex;align-items:center;justify-content:center;flex:none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M6 12.5l3.6 3.6L18 7.5"/></svg>
+          </div>
+          <div>
+            <div style="font-family:'Inter';font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#56546A;">Eindoordeel</div>
+            <div style="font-family:'Archivo';font-weight:900;font-size:19px;color:#4E4FA6;line-height:1;">{{ verdictPill }}</div>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid rgba(28,27,56,0.14);border-radius:14px;padding:20px 22px;">
+          <div style="display:flex;gap:12px;padding-bottom:13px;border-bottom:1px solid rgba(28,27,56,0.08);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="1.7" style="flex:none;margin-top:2px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div><div style="font-family:'Inter';font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Speelduur</div><div style="font-family:'Inter';font-size:14px;font-weight:600;color:#1C1B38;">50 – 150 uur</div></div>
+          </div>
+          <div style="display:flex;gap:12px;padding:13px 0;border-bottom:1px solid rgba(28,27,56,0.08);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="1.7" style="flex:none;margin-top:2px;"><rect x="7" y="7" width="10" height="10" rx="1" transform="rotate(45 12 12)"/></svg>
+            <div><div style="font-family:'Inter';font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Genre</div><div style="font-family:'Inter';font-size:14px;font-weight:600;color:#1C1B38;">RPG</div></div>
+          </div>
+          <div style="display:flex;gap:12px;padding:13px 0;border-bottom:1px solid rgba(28,27,56,0.08);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="1.7" style="flex:none;margin-top:2px;"><circle cx="9" cy="9" r="3"/><circle cx="16" cy="10" r="2.4"/><path d="M4 19c0-3 2-4.6 5-4.6"/></svg>
+            <div><div style="font-family:'Inter';font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Voor fans van</div><div style="font-family:'Inter';font-size:14px;font-weight:600;color:#1C1B38;">Skyrim, Dragon Age, Red Dead Redemption 2</div></div>
+          </div>
+          <div style="display:flex;gap:12px;padding:13px 0;border-bottom:1px solid rgba(28,27,56,0.08);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="1.7" style="flex:none;margin-top:2px;"><rect x="3" y="5" width="18" height="12" rx="1.5"/><path d="M9 21h6"/></svg>
+            <div><div style="font-family:'Inter';font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Platform</div><div style="font-family:'Inter';font-size:14px;font-weight:600;color:#1C1B38;">PC, PS4/PS5, Xbox, Switch</div></div>
+          </div>
+          <div style="display:flex;gap:12px;padding-top:13px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="1.7" style="flex:none;margin-top:2px;"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 9.5h3.2a1.6 1.6 0 010 3.2H9.8"/></svg>
+            <div><div style="font-family:'Inter';font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Prijs</div><div style="font-family:'Inter';font-size:14px;font-weight:600;color:#1C1B38;">€ 14,99 – € 39,99</div></div>
+          </div>
+        </div>
+
+        <div style="position:relative;border-radius:14px;overflow:hidden;min-height:180px;display:flex;align-items:center;justify-content:center;background:#15142E;padding:26px 24px;">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#211f42 0 14px,#2a2850 14px 28px);opacity:0.7;"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(21,20,46,0.85),rgba(21,20,46,0.4));"></div>
+          <p style="position:relative;font-family:'Source Serif 4';font-style:italic;font-size:18px;line-height:1.45;color:#F4EFE6;text-align:center;margin:0;">"Sommige games zijn niet alleen spellen. Ze zijn herinneringen."<br><span style="font-family:'Inter';font-style:normal;font-size:12px;color:#B7B4D2;display:inline-block;margin-top:10px;">— The Curator</span></p>
+        </div>
+
+        <div>
+          <div style="font-family:'Inter';font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;margin-bottom:10px;">Deel dit artikel</div>
+          <div style="display:flex;gap:8px;">
+            <button aria-label="Deel op X" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(28,27,56,0.2);background:#fff;font-family:'Archivo';font-weight:800;font-size:13px;color:#1C1B38;cursor:pointer;">X</button>
+            <button aria-label="Deel op Facebook" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(28,27,56,0.2);background:#fff;font-family:'Archivo';font-weight:800;font-size:14px;color:#1C1B38;cursor:pointer;">f</button>
+            <button aria-label="Deel op Threads" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(28,27,56,0.2);background:#fff;font-family:'Archivo';font-weight:800;font-size:12px;color:#1C1B38;cursor:pointer;">@</button>
+            <button aria-label="Kopieer link" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(28,27,56,0.2);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C1B38" stroke-width="1.8"><path d="M9 14a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1"/><path d="M15 10a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1"/></svg></button>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid rgba(28,27,56,0.14);border-radius:14px;padding:20px 22px;">
+          <div style="font-family:'Archivo';font-weight:800;font-size:15px;color:#1C1B38;margin-bottom:6px;">Blijf op de hoogte</div>
+          <p style="font-family:'Inter';font-size:13px;color:#56546A;margin:0 0 14px;line-height:1.45;">Ontvang de beste game-aanbevelingen in je inbox.</p>
+          <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:14px;">
+            <div style="display:flex;gap:9px;align-items:center;font-family:'Inter';font-size:12.5px;color:#2a2842;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="2.2" style="flex:none;"><path d="M5 12.5l4 4L19 7"/></svg>Geen gesponsorde reviews</div>
+            <div style="display:flex;gap:9px;align-items:center;font-family:'Inter';font-size:12.5px;color:#2a2842;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="2.2" style="flex:none;"><path d="M5 12.5l4 4L19 7"/></svg>Betaalde samenwerking altijd gemeld</div>
+            <div style="display:flex;gap:9px;align-items:center;font-family:'Inter';font-size:12.5px;color:#2a2842;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7D80D4" stroke-width="2.2" style="flex:none;"><path d="M5 12.5l4 4L19 7"/></svg>Adverteerder heeft geen invloed</div>
+          </div>
+          <a href="#" style="font-family:'Inter';font-size:12.5px;font-weight:600;">Lees ons volledige editorial policy →</a>
+        </div>
+
+        <div style="border-top:1px solid rgba(28,27,56,0.14);padding-top:18px;display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#7D80D4;flex:none;display:flex;align-items:center;justify-content:center;font-family:'Archivo';font-weight:800;color:#fff;font-size:15px;">TC</div>
+          <div>
+            <div style="font-family:'Inter';font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#56546A;">Geschreven door</div>
+            <div style="font-family:'Archivo';font-weight:800;font-size:16px;color:#1C1B38;margin-bottom:4px;">The Curator</div>
+            <p style="font-family:'Inter';font-size:12.5px;color:#56546A;line-height:1.45;margin:0 0 6px;">Gamer, schrijver, ontdekker. Altijd op zoek naar de volgende grote game — of verborgen parel.</p>
+            <a href="#" style="font-family:'Inter';font-size:12.5px;font-weight:600;">Meer over mij →</a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+  </main>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:820},&quot;verdict&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Gekeurd&quot;,&quot;options&quot;:[&quot;Gekeurd&quot;,&quot;Gekeurd, in de sale&quot;,&quot;Voorwaardelijk gekeurd&quot;,&quot;Afgekeurd&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Merk&quot;},&quot;stampRotation&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:-7,&quot;min&quot;:-20,&quot;max&quot;:20,&quot;step&quot;:1,&quot;unit&quot;:&quot;°&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Merk&quot;},&quot;serifBody&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Merk&quot;}}">
+class Component extends DCLogic {
+  state = { screen: 'brand' };
+  renderVals() {
+    const screen = this.state.screen;
+    const verdict = this.props.verdict ?? 'Gekeurd';
+    const rot = this.props.stampRotation ?? -7;
+    const serif = this.props.serifBody ?? true;
+
+    let sealWord = 'GEKEURD', sealColor = '#1C1B38', verdictPill = 'Worth your time?';
+    if (verdict === 'Voorwaardelijk gekeurd') {
+      sealWord = 'VOORWAARDELIJK'; sealColor = '#4E4FA6'; verdictPill = 'Voor de liefhebber';
+    } else if (verdict === 'Afgekeurd') {
+      sealWord = 'AFGEKEURD'; sealColor = '#C1443A'; verdictPill = 'Skip it — overslaan';
+    } else if (verdict === 'Gekeurd, in de sale') {
+      sealWord = 'IN DE SALE'; sealColor = '#1C1B38'; verdictPill = 'Worth it — in de sale';
+    }
+
+    const active = '#1C1B38', activeFg = '#F4EFE6', idle = 'transparent', idleFg = '#4E4FA6';
+
+    return {
+      isBrand: screen === 'brand',
+      isCard: screen === 'card',
+      isReview: screen === 'review',
+      goBrand: () => this.setState({ screen: 'brand' }),
+      goCard: () => this.setState({ screen: 'card' }),
+      goReview: () => this.setState({ screen: 'review' }),
+      brandBg: screen === 'brand' ? active : idle,
+      brandFg: screen === 'brand' ? activeFg : idleFg,
+      cardBg: screen === 'card' ? active : idle,
+      cardFg: screen === 'card' ? activeFg : idleFg,
+      reviewBg: screen === 'review' ? active : idle,
+      reviewFg: screen === 'review' ? activeFg : idleFg,
+      verdict,
+      verdictPill,
+      sealWord,
+      sealColor,
+      stampTransform: `rotate(${rot}deg)`,
+      articleFont: serif ? "'Source Serif 4', Georgia, serif" : "'Inter', system-ui, sans-serif",
+    };
+  }
+}
+</script>
+</body>
+</html>

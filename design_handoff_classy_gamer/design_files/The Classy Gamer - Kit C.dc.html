@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{background:#06152C;color:#F7F5ED;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55;}
+  a{color:#b3a9f0;text-decoration:none;}
+  a:hover{color:#c9c1f5;}
+  ::selection{background:#6C5CE7;color:#fff;}
+  .thumb{container-type:inline-size;}
+</style>
+</helmet>
+
+<div style="background:#06152C;">
+
+  <header style="border-bottom:1px solid rgba(247,245,237,0.1);">
+    <div style="max-width:1120px;margin:0 auto;padding:15px 32px;display:flex;align-items:center;gap:16px;">
+      <a href="The%20Classy%20Gamer%20-%20Home%20C.dc.html" style="display:flex;align-items:center;gap:12px;">
+        <div style="border:1.5px solid #F7F5ED;border-radius:5px;padding:5px 9px;text-align:center;line-height:0.95;">
+          <div style="font-family:'Fraunces';font-weight:800;font-size:10px;letter-spacing:0.16em;color:#F7F5ED;">THE</div>
+          <div style="font-family:'Fraunces';font-weight:800;font-size:13px;letter-spacing:0.04em;color:#F7F5ED;">CLASSY</div>
+          <div style="font-family:'Fraunces';font-weight:800;font-size:13px;letter-spacing:0.04em;color:#F7F5ED;">GAMER</div>
+        </div>
+      </a>
+      <span style="font-family:'Inter';font-size:13px;color:#8fa0bb;">← terug naar de site</span>
+    </div>
+  </header>
+
+  <section style="max-width:1120px;margin:0 auto;padding:52px 32px 0;">
+    <div style="font-family:'Inter';font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#b3a9f0;margin-bottom:12px;">Brand kit</div>
+    <h1 style="font-family:'Fraunces';font-weight:900;font-size:clamp(34px,5vw,60px);line-height:0.95;letter-spacing:-0.015em;color:#F7F5ED;margin:0 0 14px;">Herbruikbare elementen</h1>
+    <p style="font-family:'Inter';font-size:17px;line-height:1.55;color:#C4CBD6;margin:0;max-width:56ch;">De onderdelen die overal terugkomen: het TCG-monogram en het YouTube-thumbnail-sjabloon op ware 1280 × 720.</p>
+  </section>
+
+  <!-- MONOGRAM -->
+  <section style="max-width:1120px;margin:0 auto;padding:56px 32px 0;">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:26px;">
+      <h2 style="font-family:'Fraunces';font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1;margin:0;color:#F7F5ED;">Het monogram</h2>
+      <span style="font-family:'Inter';font-size:13px;color:#8fa0bb;">TCG · brandmark</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;">
+      <sc-for list="{{ monos }}" as="m" hint-placeholder-count="4">
+        <div style="background:{{ m.panel }};border:1px solid rgba(247,245,237,0.1);border-radius:16px;padding:30px 24px;display:flex;flex-direction:column;align-items:center;gap:18px;">
+          <div style="width:{{ m.size }};height:{{ m.size }};border-radius:50%;background:{{ m.bg }};border:{{ m.ring }};display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-weight:700;color:{{ m.fg }};font-size:{{ m.fs }};letter-spacing:0.02em;flex:none;">{{ m.text }}</div>
+          <div style="text-align:center;">
+            <div style="font-family:'Inter';font-size:13px;font-weight:600;color:#F7F5ED;">{{ m.name }}</div>
+            <div style="font-family:'Inter';font-size:12px;color:#8fa0bb;">{{ m.use }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- YOUTUBE THUMBNAIL -->
+  <section style="max-width:1120px;margin:0 auto;padding:64px 32px 0;">
+    <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:8px;">
+      <h2 style="font-family:'Fraunces';font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1;margin:0;color:#F7F5ED;">YouTube-thumbnail</h2>
+      <span style="font-family:'Inter';font-size:13px;color:#8fa0bb;">1280 × 720 · 16:9</span>
+    </div>
+    <p style="font-family:'Inter';font-size:14.5px;color:#8fa0bb;margin:0 0 26px;max-width:60ch;">Één sjabloon, één verdict-badge per aflevering. Sleep game-art in het vlak; de tekstlaag blijft leesbaar door de gradient links.</p>
+
+    <div style="display:flex;flex-direction:column;gap:26px;">
+      <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="2">
+        <div>
+          <div class="thumb" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#081B38;border:1px solid rgba(247,245,237,0.12);">
+            <image-slot id="{{ t.slot }}" shape="rect" placeholder="Sleep game-art (1280×720)"></image-slot>
+            <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(95deg,rgba(6,21,44,0.96) 0%,rgba(6,21,44,0.86) 40%,rgba(6,21,44,0.28) 72%,rgba(6,21,44,0.08) 100%);"></div>
+            <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 88% 84%,{{ t.glow }},transparent 46%);"></div>
+
+            <div style="position:absolute;left:5.4cqw;top:6cqw;display:flex;align-items:center;gap:2.6cqw;pointer-events:none;">
+              <div style="width:6.6cqw;height:6.6cqw;border-radius:50%;border:0.32cqw solid #6C5CE7;display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-weight:700;color:#8B7CFF;font-size:2.3cqw;">TCG</div>
+              <span style="font-family:'Inter';font-weight:700;font-size:1.9cqw;letter-spacing:0.16em;text-transform:uppercase;color:#C4CBD6;">The Classy Gamer</span>
+            </div>
+
+            <div style="position:absolute;left:5.4cqw;bottom:6cqw;right:34cqw;pointer-events:none;">
+              <span style="display:inline-flex;background:{{ t.badgeBg }};color:{{ t.badgeFg }};border:0.2cqw solid {{ t.badgeBorder }};font-family:'Inter';font-weight:800;font-size:1.7cqw;letter-spacing:0.1em;text-transform:uppercase;padding:0.9cqw 1.9cqw;border-radius:99px;margin-bottom:2.6cqw;">{{ t.verdict }}</span>
+              <div style="font-family:'Fraunces';font-weight:900;font-size:6.6cqw;line-height:0.94;letter-spacing:-0.01em;color:#F7F5ED;text-shadow:0 0.4cqw 2cqw rgba(0,0,0,0.5);">{{ t.title }}</div>
+              <div style="font-family:'Inter';font-weight:600;font-size:2.1cqw;color:#C4CBD6;margin-top:1.4cqw;">{{ t.sub }}</div>
+            </div>
+
+            <div style="position:absolute;right:5.4cqw;bottom:5.4cqw;text-align:center;pointer-events:none;">
+              <div style="font-family:'Inter';font-weight:800;font-size:1.4cqw;letter-spacing:0.12em;text-transform:uppercase;color:#b3a9f0;margin-bottom:0.6cqw;">Time Value</div>
+              <div style="font-family:'Fraunces';font-weight:900;font-size:8cqw;line-height:0.85;color:#F7F5ED;text-shadow:0 0.4cqw 2cqw rgba(0,0,0,0.55);">{{ t.tv }}<span style="font-size:3cqw;color:#8fa0bb;">/10</span></div>
+            </div>
+          </div>
+          <div style="font-family:'Inter';font-size:12.5px;color:#8fa0bb;margin-top:10px;">{{ t.caption }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <div style="max-width:1120px;margin:56px auto 0;padding:0 32px;">
+    <div style="border-top:1px solid rgba(247,245,237,0.1);padding:22px 0 60px;font-family:'Inter';font-size:12px;color:#5b6b84;">© 2026 The Classy Gamer · brand kit</div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const monos = [
+      { name: 'Primair', use: 'outline op donker', panel: '#0b2038', bg: 'transparent', ring: '1.5px solid #6C5CE7', fg: '#8B7CFF', text: 'TCG', size: '84px', fs: '22px' },
+      { name: 'Solid', use: 'op cream / foto', panel: '#F7F5ED', bg: '#6C5CE7', ring: 'none', fg: '#fff', text: 'TCG', size: '84px', fs: '22px' },
+      { name: 'Avatar', use: 'byline · The Curator', panel: '#0b2038', bg: '#6C5CE7', ring: 'none', fg: '#fff', text: 'C', size: '64px', fs: '26px' },
+      { name: 'Favicon', use: 'tab · app-icon', panel: '#0b2038', bg: '#6C5CE7', ring: 'none', fg: '#fff', text: 'C', size: '40px', fs: '18px' },
+    ];
+
+    const thumbs = [
+      { slot: 'kit-yt1', title: 'The Witcher 3', sub: 'Is deze klassieker je 100 uur nog waard?', verdict: 'Worth your time', tv: '8,5', glow: 'rgba(124,92,255,0.4)', badgeBg: '#6C5CE7', badgeFg: '#fff', badgeBorder: '#6C5CE7', caption: 'Standaard: positief verdict, violette badge.' },
+      { slot: 'kit-yt2', title: 'Pentiment', sub: 'De game die bijna iedereen miste.', verdict: 'Hidden gem', tv: '9,0', glow: 'rgba(0,166,161,0.34)', badgeBg: 'rgba(108,92,231,0.2)', badgeFg: '#b3a9f0', badgeBorder: 'rgba(108,92,231,0.7)', caption: 'Variant: Hidden Gem, outline-badge voor Discover-content.' },
+    ];
+
+    return { monos, thumbs };
+  }
+}
+</script>
+</body>
+</html>
