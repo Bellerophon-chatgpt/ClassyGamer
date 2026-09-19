@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import Home from './pages/Home';
+import Discover from './pages/Discover';
 import Speeladvies from './pages/Speeladvies';
 import MijnBacklog from './pages/MijnBacklog';
 import ComingSoon from './pages/ComingSoon';
@@ -9,9 +11,9 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<ComingSoon title="The Classy Gamer" />} />
+          <Route path="/" element={<Home />} />
           <Route path="/reviews" element={<ComingSoon title="Reviews" />} />
-          <Route path="/discover" element={<ComingSoon title="Discover" />} />
+          <Route path="/discover" element={<Discover />} />
           <Route path="/speeladvies" element={<Speeladvies />} />
           <Route path="/guides" element={<ComingSoon title="Guides" />} />
           <Route path="/mijn-backlog" element={<MijnBacklog />} />
