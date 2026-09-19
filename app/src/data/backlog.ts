@@ -28,3 +28,16 @@ export function addToBacklog(entry: Omit<BacklogEntry, 'id'>): boolean {
     return false;
   }
 }
+
+export function isInBacklog(title: string): boolean {
+  return readBacklog().some((x) => x.title === title);
+}
+
+/** Undoes an accidental add from a review page's backlog toggle. */
+export function removeFromBacklog(title: string): void {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(readBacklog().filter((x) => x.title !== title)));
+  } catch {
+    /* ignore */
+  }
+}
