@@ -1,0 +1,15 @@
+---
+// Gebruik in MDX: <Figure label="screenshot · de wereld van Velen" caption="…" /> of met src="/img/…".
+interface Props {
+  caption?: string;
+  label?: string;
+  src?: string;
+  alt?: string;
+}
+const { caption, label = 'screenshot', src, alt = '' } = Astro.props;
+---
+
+<figure class="cg-rev-figure">
+  {src ? <img src={src} alt={alt} class="cg-rev-figure-img" /> : <div class="cg-rev-figure-art"><span>{label}</span></div>}
+  {caption && <figcaption class="cg-rev-figcaption">{caption}</figcaption>}
+</figure>

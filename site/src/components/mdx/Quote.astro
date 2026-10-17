@@ -1,0 +1,12 @@
+---
+// Gebruik in MDX: <Quote cite="The Curator">Sommige games…</Quote>
+interface Props {
+  cite?: string;
+}
+const { cite = 'The Curator' } = Astro.props;
+---
+
+<blockquote class="cg-rev-blockquote">
+  <p><slot /></p>
+  <cite>— {cite}</cite>
+</blockquote>

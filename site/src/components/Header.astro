@@ -1,0 +1,45 @@
+---
+import { NAV_LINKS, isActive } from '../lib/nav';
+
+interface Props {
+  variant?: 'default' | 'review';
+}
+const { variant = 'default' } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class:list={['cg-header', { 'cg-header-review': variant === 'review' }]}>
+  <div class="cg-header-inner">
+    <a href="/" class="cg-logo" aria-label="The Classy Gamer — naar home">
+      <div class="cg-logo-box">
+        <div class="cg-logo-the">THE</div>
+        <div class="cg-logo-word">CLASSY</div>
+        <div class="cg-logo-word">GAMER</div>
+      </div>
+      {variant === 'review' && <div class="cg-logo-monogram" aria-hidden="true">TCG</div>}
+    </a>
+
+    <nav class="cg-nav-desktop" aria-label="Hoofdnavigatie">
+      {NAV_LINKS.map((l) => <a href={l.href} class:list={{ active: isActive(l.href, path) }} aria-current={isActive(l.href, path) ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+
+    <div class="cg-header-actions">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C4CBD6" stroke-width="2" class="cg-search-icon" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M20 20l-3.5-3.5"></path>
+      </svg>
+      <a href="/speeladvies" class="cg-pill-cta">Wat moet ik spelen?</a>
+    </div>
+
+    <details class="cg-burger">
+      <summary aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F5ED" stroke-width="2" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18"></path>
+        </svg>
+      </summary>
+      <div class="cg-burger-menu">
+        {NAV_LINKS.map((l) => <a href={l.href} class:list={{ active: isActive(l.href, path) }}>{l.label}</a>)}
+      </div>
+    </details>
+  </div>
+</header>

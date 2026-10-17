@@ -1,18 +1,21 @@
 ---
-import '@fontsource-variable/fraunces/opsz.css';
-import '@fontsource-variable/fraunces/opsz-italic.css';
+import '@fontsource-variable/fraunces/full.css';
+import '@fontsource-variable/fraunces/full-italic.css';
 import '@fontsource-variable/inter';
-import '@fontsource/caveat/500.css';
+import '@fontsource/caveat/600.css';
+import '@fontsource/caveat/700.css';
 import '../styles/global.css';
-import Nav from '../components/Nav.astro';
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
   description?: string;
+  /** Reviewpagina: header met TCG-monogram en footer met nieuwsbrief-blok, zoals in de handoff. */
+  variant?: 'default' | 'review';
 }
 
-const { title, description = 'Better games. More time.' } = Astro.props;
+const { title, description = 'Better games. More time. Onafhankelijke game-reviews door The Curator.', variant = 'default' } = Astro.props;
 const fullTitle = title === 'The Classy Gamer' ? title : `${title} · The Classy Gamer`;
 ---
 
@@ -23,12 +26,16 @@ const fullTitle = title === 'The Classy Gamer' ? title : `${title} · The Classy
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#F6F4EF" />
+    <meta name="theme-color" content="#06152C" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body class="min-h-screen bg-cream">
-    <Nav />
-    <slot />
-    <Footer />
+  <body>
+    <div class:list={["cg-page", { "cg-page-review": variant === "review" }]}>
+      <Header variant={variant} />
+      <main>
+        <slot />
+      </main>
+      <Footer variant={variant} />
+    </div>
   </body>
 </html>

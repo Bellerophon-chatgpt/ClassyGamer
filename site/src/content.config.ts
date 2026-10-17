@@ -16,6 +16,11 @@ const reviews = defineCollection({
     readingTime: z.string().optional(),
     curator: z.string().default('The Curator'),
     acquisition: z.string(),
+    /** Kort antwoord bovenaan ("In het kort"). */
+    intro: z.string().optional(),
+    /** Kop boven de volledige review (de MDX-body). */
+    reviewTitle: z.string().optional(),
+    release: z.string().optional(),
     chips: z.object({
       speelduur: z.string(),
       genre: z.string(),
@@ -34,8 +39,9 @@ const reviews = defineCollection({
       toegankelijkheid: z.number(),
       value: z.number(),
     }),
+    /** Eerste zin wordt de cursieve tagline in de verdict-kaart, de rest de toelichting. */
     verdictText: z.string(),
-    timeValue: z.object({ score: z.number(), quote: z.string() }),
+    timeValue: z.object({ score: z.number(), quote: z.string(), tags: z.array(z.string()).default([]) }),
     pros: z.array(z.object({ title: z.string(), text: z.string() })),
     cons: z.array(z.object({ title: z.string(), text: z.string() })),
     priceTiers: z.array(
@@ -43,9 +49,14 @@ const reviews = defineCollection({
     ),
     forWho: z.object({ yes: z.array(z.string()), no: z.array(z.string()) }),
     conclusion: z.string(),
+    /** "Als je dit goed vond…" — vergelijkbare games. `href` alleen als er een review van is. */
     related: z.array(
-      z.object({ title: z.string(), match: z.number(), verdict: z.string(), note: z.string() }),
+      z.object({ title: z.string(), match: z.number(), verdict: z.string(), note: z.string(), href: z.string().optional() }),
     ),
+    /** "Misschien vind je dit ook interessant" — artikelen/guides. */
+    readMore: z.array(z.object({ tag: z.string(), title: z.string(), href: z.string().optional() })).default([]),
+    /** Toon de Backlog Club-band ("Speel je deze mee?"). */
+    backlogClub: z.boolean().default(false),
   }),
 });
 

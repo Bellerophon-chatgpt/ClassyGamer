@@ -1,13 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import tailwindcss from '@tailwindcss/vite';
+import react from '@astrojs/react';
 
 export default defineConfig({
   output: 'static',
   devToolbar: { enabled: false },
-  integrations: [mdx()],
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  integrations: [mdx(), react()],
 });

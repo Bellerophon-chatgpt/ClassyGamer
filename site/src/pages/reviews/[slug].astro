@@ -1,20 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ArtPlaceholder from '../../components/ArtPlaceholder.astro';
-import ClassyScorecard from '../../components/ClassyScorecard.astro';
-import Conclusion from '../../components/Conclusion.astro';
-import ForWho from '../../components/ForWho.astro';
-import InfoChips from '../../components/InfoChips.astro';
-import NewsletterSignup from '../../components/NewsletterSignup.astro';
-import PriceTiers from '../../components/PriceTiers.astro';
-import ProsCons from '../../components/ProsCons.astro';
-import RelatedGames from '../../components/RelatedGames.astro';
-import TimeValue from '../../components/TimeValue.astro';
-import TransparencyLine from '../../components/TransparencyLine.astro';
-import VerdictCard from '../../components/VerdictCard.astro';
-import VerdictPill from '../../components/VerdictPill.astro';
-import { formatDate, verdictLabels } from '../../lib/verdict';
+import Figure from '../../components/mdx/Figure.astro';
+import Quote from '../../components/mdx/Quote.astro';
+import Spoiler from '../../components/mdx/Spoiler.astro';
+import { formatDate, formatScore, parseHours, splitFirstSentence, starString, verdictLabels } from '../../lib/verdict';
 
 export async function getStaticPaths() {
   const reviews = await getCollection('reviews');
@@ -24,61 +14,415 @@ export async function getStaticPaths() {
 const { review } = Astro.props;
 const r = review.data;
 const { Content } = await render(review);
-const verdictLabel = verdictLabels[r.verdict];
+
+const verdict = verdictLabels[r.verdict];
+const [verdictTagline, verdictDesc] = splitFirstSentence(r.verdictText);
+const tv = formatScore(r.timeValue.score);
+const initial = r.curator.replace(/^The\s+/, '').charAt(0);
+
+const facts: [string, string][] = [
+  ['Speelduur', r.chips.speelduur],
+  ['Genre', r.chips.genre],
+  ['Spelers', r.chips.spelers],
+  ['Moeilijkheid', r.chips.moeilijkheid],
+  ['Platform', r.chips.platforms.join(' · ')],
+  ['Prijs', r.chips.prijs],
+  ...(r.release ? [['Release', r.release] as [string, string]] : []),
+];
+
+const scoreLabels = {
+  verhaal: 'Verhaal',
+  wereld: 'Wereld',
+  gameplay: 'Gameplay',
+  exploratie: 'Exploratie',
+  personages: 'Personages',
+  progressie: 'Progressie',
+  toegankelijkheid: 'Toegankelijkheid',
+  value: 'Value',
+} as const;
+const scores = (Object.keys(scoreLabels) as (keyof typeof scoreLabels)[]).map((k) => ({ label: scoreLabels[k], score: r.scorecard[k] }));
+
+// Prijsbalken lopen af van 100% naar ~34%, zoals in het ontwerp.
+// De duurste tier ("wacht op de sale") is gedempt.
+const tiers = r.priceTiers.map((t, i, all) => ({
+  ...t,
+  pct: all.length > 1 ? 100 - (i * 66) / (all.length - 1) : 100,
+  muted: all.length > 1 && i === all.length - 1,
+}));
+const priceCol = Math.max(...r.priceTiers.map((t) => t.price.length));
+
+// Gegevens voor de "Zet op backlog"-knoppen (zelfde localStorage-sleutel als Speeladvies / Mijn Backlog).
+const backlog = { 'data-title': r.game, 'data-genre': r.chips.genre, 'data-hours': String(parseHours(r.chips.speelduur)), 'data-verdict': verdict };
 ---
 
-<BaseLayout title={r.game} description={r.subtitle}>
-  <main class="mx-auto max-w-content px-4 sm:px-6">
-    <header class="pt-12 pb-8 sm:pt-16">
-      <VerdictPill label={verdictLabel} />
-      <h1 class="mt-5 max-w-4xl text-[42px] leading-[1] font-bold sm:text-[64px]">{r.game}</h1>
-      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-secondary sm:text-xl">{r.subtitle}</p>
-
-      <div class="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-        <span class="grid size-9 place-items-center rounded-full bg-violet font-serif font-bold text-surface" aria-hidden="true">
-          {r.curator.replace(/^The\s+/, '').charAt(0)}
-        </span>
-        <span class="font-semibold">{r.curator}</span>
-        <span class="text-border" aria-hidden="true">|</span>
-        <span class="text-secondary">
-          <time datetime={r.pubDate.toISOString()}>{formatDate(r.pubDate)}</time>
-          {r.readingTime && <span class="ml-1 whitespace-nowrap">· {r.readingTime} leestijd</span>}
-        </span>
-        {r.updatedDate && <span class="text-secondary">· bijgewerkt {formatDate(r.updatedDate)}</span>}
-        {r.spoilerFree && <VerdictPill label="Spoilervrij" tone="soft" class="px-2.5 py-1 text-[10px]" />}
-      </div>
-      <TransparencyLine acquisition={r.acquisition} class="mt-4" />
-    </header>
-
-    <ArtPlaceholder title={r.game} image={r.heroImage} />
-
-    <div class="mt-6">
-      <InfoChips chips={r.chips} />
-    </div>
-
-    <div class="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14">
-      <div class="lg:order-2">
-        <div class="lg:sticky lg:top-24">
-          <VerdictCard label={verdictLabel} stars={r.stars} text={r.verdictText} />
+<BaseLayout title={r.game} description={r.subtitle} variant="review">
+  <div class="cg-rev-page">
+    <section class="cg-rev-hero">
+      <div class="cg-rev-hero-bg">{r.heroImage && <img src={r.heroImage} alt="" class="cg-cover-img" />}</div>
+      {!r.heroImage && <span class="cg-rev-hero-label">cinematisch game-artwork</span>}
+      <div class="cg-rev-hero-fade"></div>
+      <div class="cg-rev-hero-inner">
+        <div class="cg-rev-hero-copy">
+          <div class="cg-rev-verdict-badge">{verdict}</div>
+          <h1 class="cg-rev-title">{r.game}</h1>
+          <p class="cg-rev-teaser">{r.subtitle}</p>
+          <div class="cg-rev-byline-row">
+            <div class="cg-rev-avatar">{initial}</div>
+            <span class="cg-rev-byline-text"><strong>{r.curator}</strong> · Gamer, schrijver, ontdekkingsreiziger</span>
+            <span class="cg-rev-dot">·</span>
+            <span class="cg-rev-byline-text">
+              <time datetime={r.pubDate.toISOString()}>{formatDate(r.pubDate)}</time>{r.readingTime && ` · ${r.readingTime} leestijd`}{
+                r.updatedDate && ` · bijgewerkt ${formatDate(r.updatedDate)}`
+              }
+            </span>
+            {r.spoilerFree && <span class="cg-rev-spoilerfree">Spoilervrij</span>}
+          </div>
+          <p class="cg-rev-disclaimer">
+            {r.acquisition} · geen gesponsorde review. <a href="/zo-beoordeel-ik">Zo beoordeel ik →</a>
+          </p>
         </div>
       </div>
-      <article class="prose-tcg max-w-prose lg:order-1">
-        <Content />
-      </article>
+    </section>
+
+    <section class="cg-rev-facts">
+      <div class="cg-rev-facts-grid">
+        {
+          facts.map(([label, value]) => (
+            <div class="cg-rev-fact">
+              <div class="cg-rev-fact-label">{label}</div>
+              <div class="cg-rev-fact-value">{value}</div>
+            </div>
+          ))
+        }
+        <div class="cg-rev-fact highlight">
+          <div class="cg-rev-fact-label">Time Value</div>
+          <div class="cg-rev-fact-value">{tv} / 10</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cg-rev-main">
+      <div class="cg-rev-main-inner">
+        <article class="cg-rev-article">
+          {
+            r.intro && (
+              <div class="cg-rev-block">
+                <div class="cg-rev-kicker">In het kort</div>
+                <p class="cg-rev-lede">{r.intro}</p>
+              </div>
+            )
+          }
+
+          <div class="cg-rev-block-xl">
+            <div class="cg-rev-verdict-card">
+              <div class="cg-rev-verdict-glow"></div>
+              <div class="cg-rev-verdict-inner">
+                <div class="cg-rev-verdict-kicker">Ons verdict</div>
+                <div class="cg-rev-verdict-label">{verdict}</div>
+                <div class="cg-rev-verdict-stars" role="img" aria-label={`${r.stars.toLocaleString('nl-NL')} van 5 sterren`}>
+                  {starString(r.stars)}
+                </div>
+                <p class="cg-rev-verdict-tagline">{verdictTagline}</p>
+                {verdictDesc && <p class="cg-rev-verdict-desc">{verdictDesc}</p>}
+                <a href="#vergelijkbaar" class="cg-rev-verdict-btn">Vergelijkbare games →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="cg-rev-two-col cg-rev-block-xl">
+            <div>
+              <h2 class="cg-rev-h2">Waarom zou je dit spelen?</h2>
+              <div class="cg-rev-why-list">
+                {
+                  r.pros.map((p, i) => (
+                    <div class="cg-rev-why-item">
+                      <span class="cg-rev-why-num">{String(i + 1).padStart(2, '0')}</span>
+                      <div>
+                        <h3 class="cg-rev-why-title">{p.title}</h3>
+                        <p class="cg-rev-why-desc">{p.text}</p>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+            <div>
+              <h2 class="cg-rev-h2" style="margin-bottom:12px">Waar moet je rekening mee houden?</h2>
+              <p class="cg-rev-caveat-sub">Eerlijk is eerlijk — geen dealbreakers, maar je weet waar je aan begint.</p>
+              <div class="cg-rev-caveat-list">
+                {
+                  r.cons.map((c) => (
+                    <div class="cg-rev-caveat-card">
+                      <h3 class="cg-rev-caveat-title">{c.title}</h3>
+                      <p class="cg-rev-caveat-desc">{c.text}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="cg-rev-block-xl">
+            <h2 class="cg-rev-h2" style="margin-bottom:8px">The Classy Scorecard</h2>
+            <p class="cg-rev-caveat-sub">Ondersteunend — niet het hoofdverdict.</p>
+            <div class="cg-rev-scorecard">
+              {
+                scores.map((row) => (
+                  <div class="cg-rev-score-row">
+                    <span class="cg-rev-score-label">{row.label}</span>
+                    <span class="cg-rev-score-track">
+                      <span class="cg-rev-score-fill" style={`width:${row.score * 10}%`} />
+                    </span>
+                    <span class="cg-rev-score-value">{formatScore(row.score)}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="cg-rev-block-xl">
+            <div class="cg-rev-tv-card">
+              <div class="cg-rev-tv-glow"></div>
+              <div class="cg-rev-tv-row">
+                <div style="flex:none">
+                  <div class="cg-rev-tv-kicker">Time Value</div>
+                  <div class="cg-rev-tv-value">{tv}<span> / 10</span></div>
+                </div>
+                <div style="flex:1;min-width:260px">
+                  <p class="cg-rev-tv-quote">"{r.timeValue.quote}"</p>
+                  {
+                    r.timeValue.tags.length > 0 && (
+                      <div class="cg-rev-tv-tags">
+                        {r.timeValue.tags.map((t) => (
+                          <span class="cg-rev-tv-tag">{t}</span>
+                        ))}
+                      </div>
+                    )
+                  }
+                  <p class="cg-rev-tv-note">Time Value meet niet hoe lang een game is, maar hoe goed hij jouw tijd beloont.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cg-rev-fit-grid cg-rev-block-xl">
+            <div class="cg-rev-fit-card yes">
+              <h3 class="cg-rev-fit-title">Dit is jouw game als...</h3>
+              <div style="display:flex;flex-direction:column;gap:11px">
+                {
+                  r.forWho.yes.map((item) => (
+                    <div class="cg-rev-fit-item">
+                      <span class="cg-rev-fit-mark yes">✓</span>
+                      <span>{item}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+            <div class="cg-rev-fit-card no">
+              <h3 class="cg-rev-fit-title">Misschien niet voor jou als...</h3>
+              <div style="display:flex;flex-direction:column;gap:11px">
+                {
+                  r.forWho.no.map((item) => (
+                    <div class="cg-rev-fit-item">
+                      <span class="cg-rev-fit-mark no">✕</span>
+                      <span>{item}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="cg-rev-block-xl">
+            <h2 class="cg-rev-h2" style="font-size:clamp(28px,3.6vw,38px);margin-bottom:8px">Wat zou ik ervoor betalen?</h2>
+            <p class="cg-rev-caveat-sub">Prijsadvies op basis van wat je terugkrijgt.</p>
+            <div style={`display:flex;flex-direction:column;gap:14px;--price-col:${priceCol > 4 ? `${priceCol * 0.6}em` : '70px'}`}>
+              {
+                tiers.map((t) => (
+                  <div class:list={['cg-rev-price-row', { highlight: t.highlight, muted: t.muted }]}>
+                    <span class="cg-rev-price-value">{t.price}</span>
+                    <span class="cg-rev-price-track">
+                      <span class="cg-rev-price-fill" style={`width:${t.pct}%`} />
+                    </span>
+                    <span class="cg-rev-price-tag">{t.label}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="cg-rev-divider"></div>
+
+          <div class="cg-rev-body cg-rev-block-lg">
+            <div class="cg-rev-kicker" style="margin-bottom:14px">De volledige review</div>
+            {r.reviewTitle && <h2 class="cg-rev-h2" style="font-size:clamp(30px,4vw,44px);margin-top:0">{r.reviewTitle}</h2>}
+            <Content components={{ Figure, Quote, Spoiler }} />
+          </div>
+
+          <div class="cg-rev-block-lg">
+            <div class="cg-rev-conclusion">
+              <div class="cg-rev-conclusion-glow"></div>
+              <div style="position:relative">
+                <div class="cg-rev-conclusion-kicker">Onze conclusie</div>
+                <div class="cg-rev-conclusion-label">{verdict}</div>
+                <p class="cg-rev-conclusion-quote">"{r.conclusion}"</p>
+                <div class="cg-rev-conclusion-actions">
+                  <a href="/speeladvies" class="cg-rev-btn-solid">Wat moet ik hierna spelen? →</a>
+                  <button type="button" class="cg-rev-btn-outline" style="--bt-fg:#fff" data-backlog-toggle {...backlog}>
+                    + Voeg toe aan backlog
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {
+            r.related.length > 0 && (
+              <div class="cg-rev-block-lg" id="vergelijkbaar" style="scroll-margin-top:96px">
+                <h2 class="cg-rev-h2" style="font-size:clamp(26px,3.4vw,36px);margin-bottom:6px">
+                  Als je dit goed vond...
+                </h2>
+                <p class="cg-rev-caveat-sub">Aanbevelingen op basis van wat deze game goed doet — niet op genre alleen.</p>
+                <div class="cg-rev-recs-grid">
+                  {r.related.map((g) => {
+                    const Tag = g.href ? 'a' : 'div';
+                    return (
+                      <Tag href={g.href} class="cg-rev-rec-card">
+                        <div class="cg-rev-rec-art">
+                          <span class="label">game-art</span>
+                          <span class="match">{g.match}% match</span>
+                        </div>
+                        <div class="cg-rev-rec-body">
+                          <h3 class="cg-rev-rec-title">{g.title}</h3>
+                          <div class="cg-rev-rec-tag">{g.verdict}</div>
+                          <p class="cg-rev-rec-desc">{g.note}</p>
+                        </div>
+                      </Tag>
+                    );
+                  })}
+                </div>
+              </div>
+            )
+          }
+
+          {
+            r.backlogClub && (
+              <div class="cg-rev-block-lg">
+                <div class="cg-rev-club-band">
+                  <div class="cg-rev-club-copy">
+                    <h3 class="cg-rev-club-title">Speel je deze mee?</h3>
+                    <p class="cg-rev-club-desc">
+                      Deze game was onderdeel van The Backlog Club. Bekijk wat onze community ervan vond en doe volgende maand mee.
+                    </p>
+                  </div>
+                  <a href="/backlog-club" class="cg-rev-club-btn">
+                    Bekijk Backlog Club →
+                  </a>
+                </div>
+              </div>
+            )
+          }
+
+          <div class="cg-rev-author-row cg-rev-block-lg">
+            <div class="cg-rev-author-avatar">{initial}</div>
+            <div>
+              <div class="cg-rev-author-name">{r.curator}</div>
+              <p class="cg-rev-author-role">Gamer. Ontdekker. Onverbeterlijke backlog-verzamelaar.</p>
+              <p class="cg-rev-author-quote">"Op zoek naar de volgende game die écht mijn tijd waard is."</p>
+              <a href="/over" class="cg-rev-author-link">Meer van The Curator →</a>
+            </div>
+          </div>
+
+          {
+            r.readMore.length > 0 && (
+              <div>
+                <h2 class="cg-rev-h2" style="font-size:clamp(24px,3.2vw,32px);margin-bottom:22px">
+                  Misschien vind je dit ook interessant
+                </h2>
+                <div class="cg-rev-related-grid">
+                  {r.readMore.map((m) => (
+                    <a href={m.href ?? '/guides'} class="cg-rev-related-cell">
+                      <div class="cg-rev-related-tag">{m.tag}</div>
+                      <div class="cg-rev-related-title">{m.title}</div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+        </article>
+
+        <aside class="cg-rev-aside">
+          <div class="cg-rev-aside-card">
+            <div class="cg-rev-aside-verdict">{verdict}</div>
+            <div class="cg-rev-aside-tv">
+              <div class="cg-rev-aside-tv-label">Time Value</div>
+              <div class="cg-rev-aside-tv-value">{tv}<span> / 10</span></div>
+            </div>
+            <div class="cg-rev-aside-facts">
+              <div class="cg-rev-aside-fact-row"><span>Speelduur</span><span>{r.chips.speelduur}</span></div>
+              <div class="cg-rev-aside-fact-row"><span>Genre</span><span>{r.chips.genre}</span></div>
+              <div class="cg-rev-aside-fact-row"><span>Spelers</span><span>{r.chips.spelers}</span></div>
+            </div>
+            <button type="button" class="cg-rev-aside-btn outline" style="--bt-fg:#6C5CE7" data-backlog-toggle {...backlog}>
+              + Voeg toe aan backlog
+            </button>
+            <a href="/speeladvies" class="cg-rev-aside-btn solid">Wat nu? →</a>
+            <div class="cg-rev-aside-added" data-backlog-note hidden>✓ Staat nu in je backlog</div>
+          </div>
+          <div class="cg-rev-aside-note">
+            <strong>Transparant.</strong> Zelf gekocht, geen gesponsorde review. Geen adverteerder had invloed op dit oordeel.
+            <a href="/statuut">Redactiestatuut →</a>
+          </div>
+        </aside>
+      </div>
     </div>
 
-    <div class="mt-16 space-y-12">
-      <ProsCons pros={r.pros} cons={r.cons} />
-      <div class="grid gap-5 lg:grid-cols-[1.25fr_1fr]">
-        <ClassyScorecard scorecard={r.scorecard} />
-        <TimeValue score={r.timeValue.score} quote={r.timeValue.quote} />
+    <div class="cg-rev-mobilebar">
+      <div class="cg-rev-mobilebar-info">
+        <div class="cg-rev-mobilebar-label">Verdict</div>
+        <div class="cg-rev-mobilebar-row">
+          <span class="cg-rev-mobilebar-verdict">{verdict}</span>
+          <span class="cg-rev-mobilebar-tv">TV {tv}</span>
+        </div>
       </div>
-      <PriceTiers tiers={r.priceTiers} />
-      <ForWho yes={r.forWho.yes} no={r.forWho.no} />
-      <Conclusion label={verdictLabel} text={r.conclusion} />
-      <TransparencyLine acquisition={r.acquisition} />
-      <RelatedGames games={r.related} />
-      <NewsletterSignup />
+      <button type="button" class="cg-rev-mobilebar-btn" data-backlog-toggle {...backlog}>+ Voeg toe aan backlog</button>
     </div>
-  </main>
+  </div>
 </BaseLayout>
+
+<script>
+  import { addToBacklog, isInBacklog, removeFromBacklog } from '../../react/data/backlog';
+  import type { Verdict } from '../../react/types';
+
+  // Alle backlog-knoppen op de pagina (zijbalk, conclusie, mobiele balk) delen één status.
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-backlog-toggle]')];
+  const note = document.querySelector<HTMLElement>('[data-backlog-note]');
+  const data = buttons[0]?.dataset;
+
+  const sync = () => {
+    const inBacklog = !!data?.title && isInBacklog(data.title);
+    for (const b of buttons) {
+      b.toggleAttribute('data-in', inBacklog);
+      b.textContent = inBacklog ? '✓ In mijn backlog' : '+ Voeg toe aan backlog';
+    }
+    if (note) note.hidden = !inBacklog;
+  };
+
+  for (const b of buttons) {
+    b.addEventListener('click', () => {
+      if (!data?.title) return;
+      if (isInBacklog(data.title)) removeFromBacklog(data.title);
+      else
+        addToBacklog({
+          title: data.title,
+          genre: data.genre ?? '',
+          hours: Number(data.hours ?? 0),
+          verdict: (data.verdict ?? 'WORTH YOUR TIME') as Verdict,
+        });
+      sync();
+    });
+  }
+  sync();
+</script>

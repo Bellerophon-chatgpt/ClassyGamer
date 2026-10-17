@@ -1,0 +1,19 @@
+---
+// Gebruik in MDX: <Spoiler label="Dit gedeelte bespreekt een verhaalontwikkeling.">…</Spoiler>
+// Pure HTML (<details>), geen JavaScript nodig.
+interface Props {
+  label?: string;
+}
+const { label = 'Dit gedeelte bespreekt een verhaalontwikkeling.' } = Astro.props;
+---
+
+<details class="cg-rev-spoiler">
+  <summary class="cg-rev-spoiler-row">
+    <span class="cg-rev-spoiler-tag">
+      <span class="cg-rev-spoiler-warn">⚠ SPOILER</span>
+      <span class="cg-rev-spoiler-text">{label}</span>
+    </span>
+    <span class="cg-rev-spoiler-btn"><span class="show">Toon spoiler</span><span class="hide">Verberg</span></span>
+  </summary>
+  <div class="cg-rev-spoiler-content"><slot /></div>
+</details>

@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { verdictLabels, verdictPill } from '../../lib/verdict';
+
+const reviews = (await getCollection('reviews')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Reviews" description="Alle reviews van The Curator — is deze game je tijd waard?">
+  <section class="cg-section">
+    <div class="cg-section-head">
+      <div class="cg-section-eyebrow">Reviews</div>
+      <h1 class="cg-section-title">Is het je tijd waard?</h1>
+      <p class="cg-section-desc">Eerlijke, spoilervrije reviews. Nooit gesponsord.</p>
+    </div>
+    <div class="cg-card-grid">
+      {
+        reviews.map((r) => {
+          const pill = verdictPill[r.data.verdict];
+          return (
+            <a href={`/reviews/${r.id}/`} class="cg-card">
+              <div class="cg-card-art">
+                {r.data.heroImage ? (
+                  <img src={r.data.heroImage} alt="" class="cg-cover-img" />
+                ) : (
+                  <div class="cg-art-slot">
+                    <span class="cg-art-slot-label">art</span>
+                  </div>
+                )}
+                <span class="cg-card-badge-bl" style={`background:${pill.vbg};color:${pill.vfg}`}>
+                  {verdictLabels[r.data.verdict]}
+                </span>
+              </div>
+              <div class="cg-card-body">
+                <div class="cg-card-eyebrow">{r.data.chips.genre}</div>
+                <h2 class="cg-card-title">{r.data.game}</h2>
+                <p class="cg-card-desc">{r.data.subtitle}</p>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+</BaseLayout>

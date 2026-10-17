@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MijnBacklog from '../react/pages/MijnBacklog';
+---
+
+<BaseLayout title="Mijn Backlog" description="Je speelstapel in tijd uitgedrukt.">
+  <MijnBacklog client:load />
+</BaseLayout>

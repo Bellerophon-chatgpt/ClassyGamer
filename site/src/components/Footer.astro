@@ -1,27 +1,67 @@
 ---
-import Monogram from './Monogram.astro';
+import { NAV_LINKS } from '../lib/nav';
+
+interface Props {
+  variant?: 'default' | 'review';
+}
+const { variant = 'default' } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-24 bg-navy-900 text-cream">
-  <div class="mx-auto flex max-w-content flex-col gap-10 px-4 py-14 sm:px-6 md:flex-row md:items-end md:justify-between">
-    <div>
-      <div class="flex items-center gap-3">
-        <Monogram />
-        <span class="font-serif text-xl font-semibold">The Classy Gamer</span>
+<footer class:list={['cg-footer', { 'cg-footer-review': variant === 'review' }]}>
+  <div class="cg-footer-inner">
+    <div class="cg-footer-cols">
+      <div class="cg-footer-brand">
+        <div class="cg-name">The Classy Gamer</div>
+        <p class="cg-footer-tagline">Better games. More time.</p>
+        <div class="cg-footer-tricol">
+          <span>DISCOVER</span>
+          <span>DECIDE</span>
+          <span>DISCUSS</span>
+        </div>
       </div>
-      <p class="mt-3 font-script text-[28px] leading-none text-violet-100">Better games. More time.</p>
-      <p class="mt-4 max-w-sm text-sm leading-relaxed text-cream/60">
-        Onafhankelijke reviews door The Curator. Nooit gesponsord, altijd met de vraag: is dit je tijd waard?
-      </p>
+
+      <div class="cg-footer-links">
+        <span class="cg-footer-heading">Ontdek</span>
+        {NAV_LINKS.slice(1).map((l) => <a href={l.href}>{l.label}</a>)}
+      </div>
+
+      {
+        variant === 'review' ? (
+          <div class="cg-footer-list">
+            <div class="cg-footer-list-title">The Classy List</div>
+            <p class="cg-footer-list-desc">Ontvang iedere week de beste game-aanbevelingen.</p>
+            <div class="cg-beehiiv-slot">
+              <Fragment set:html="<!-- BEEHIIV EMBED HIER (compact) -->" />
+              <div class="cg-footer-list-form">
+                <input placeholder="jouw@email.nl" type="email" disabled aria-label="E-mailadres (binnenkort)" />
+                <button type="button" disabled>Inschrijven</button>
+              </div>
+            </div>
+            <div class="cg-footer-meta-links">
+              <a href="/over">Over The Curator</a>
+              <a href="/statuut">Redactiestatuut</a>
+            </div>
+          </div>
+        ) : (
+      <div class="cg-footer-curator">
+        <div class="cg-curator-row">
+          <div class="cg-curator-avatar">C</div>
+          <div>
+            <div class="cg-curator-name">The Curator</div>
+            <div class="cg-curator-sub">Onafhankelijk · nooit gesponsord</div>
+          </div>
+        </div>
+        <p class="cg-curator-blurb">Eén mens die eerlijk zegt of een game je tijd waard is. Kwaliteit boven hype.</p>
+        <a href="/zo-beoordeel-ik" class="cg-curator-link">Zo beoordeel ik →</a>
+        <div class="cg-footer-meta-links">
+          <a href="/over">Over The Curator</a>
+          <a href="/statuut">Redactiestatuut</a>
+        </div>
+      </div>
+        )
+      }
     </div>
-    <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-cream/70" aria-label="Footer">
-      <a href="/" class="hover:text-cream">Home</a>
-      <a href="/over" class="hover:text-cream">Over The Curator</a>
-      <a href="/statuut" class="hover:text-cream">Redactiestatuut</a>
-    </nav>
-  </div>
-  <div class="border-t border-cream/10">
-    <p class="mx-auto max-w-content px-4 py-5 text-xs text-cream/40 sm:px-6">© {year} The Classy Gamer</p>
+    <div class="cg-footer-bottom">© {year} The Classy Gamer</div>
   </div>
 </footer>

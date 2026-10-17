@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+import Home from '../react/pages/Home';
+import { starString, verdictLabels, verdictPill } from '../lib/verdict';
+
+const reviews = (await getCollection('reviews')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const latest = reviews[0];
+
+const featured = latest && {
+  title: latest.data.game,
+  subtitle: latest.data.subtitle,
+  href: `/reviews/${latest.id}/`,
+  verdict: verdictLabels[latest.data.verdict],
+  stars: starString(latest.data.stars),
+  meta: [latest.data.curator, latest.data.readingTime].filter(Boolean).join(' · '),
+  image: latest.data.heroImage,
+};
+
+const cards = reviews.map((r) => ({
+  title: r.data.game,
+  genre: r.data.chips.genre,
+  teaser: r.data.subtitle,
+  verdict: verdictLabels[r.data.verdict],
+  ...verdictPill[r.data.verdict],
+  href: `/reviews/${r.id}/`,
+  image: r.data.heroImage,
+}));
+---
+
+<BaseLayout title="The Classy Gamer">
+  {featured && <Home featured={featured} reviews={cards} />}
+  <NewsletterSignup />
+</BaseLayout>

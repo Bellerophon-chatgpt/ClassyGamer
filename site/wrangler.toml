@@ -1,0 +1,5 @@
+# Cloudflare Pages — statische Astro-build.
+# Dashboard: Root directory = site, Build command = npm run build, Output directory = dist
+name = "the-classy-gamer"
+compatibility_date = "2026-10-01"
+pages_build_output_dir = "./dist"

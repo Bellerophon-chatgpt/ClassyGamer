@@ -1,0 +1,18 @@
+---
+// Eenvoudige tekstpagina (Over, Statuut) in de stijl van de handoff.
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro: string;
+}
+const { eyebrow, title, intro } = Astro.props;
+---
+
+<section class="cg-text-page">
+  <div class="cg-section-eyebrow">{eyebrow}</div>
+  <h1 class="cg-text-page-title">{title}</h1>
+  <p class="cg-text-page-intro">{intro}</p>
+  <div class="cg-text-page-body">
+    <slot />
+  </div>
+</section>
