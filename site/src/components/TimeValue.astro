@@ -1,0 +1,22 @@
+---
+import { formatScore } from '../lib/verdict';
+
+interface Props {
+  score: number;
+  quote: string;
+}
+const { score, quote } = Astro.props;
+---
+
+<section class="flex flex-col justify-between gap-6 rounded-card bg-navy-800 p-7 text-cream">
+  <div>
+    <p class="eyebrow text-violet-100/70">Time Value</p>
+    <p class="mt-2 font-serif text-7xl leading-none font-bold tracking-tight">
+      {formatScore(score)}<span class="ml-1 text-2xl font-medium text-cream/50">/ 10</span>
+    </p>
+  </div>
+  <blockquote class="border-l-2 border-violet pl-4 font-serif text-lg leading-relaxed text-cream/90 italic">
+    “{quote}”
+  </blockquote>
+  <p class="text-xs text-cream/50">Time Value meet niet hoe lang een game is, maar hoe goed hij jouw tijd beloont.</p>
+</section>

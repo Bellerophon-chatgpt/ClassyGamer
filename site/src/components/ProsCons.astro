@@ -1,0 +1,38 @@
+---
+interface Item {
+  title: string;
+  text: string;
+}
+interface Props {
+  pros: Item[];
+  cons: Item[];
+}
+const { pros, cons } = Astro.props;
+const columns = [
+  { heading: 'Waarom je dit wilt spelen', items: pros, icon: '+', tone: 'bg-success/12 text-success' },
+  { heading: 'Waar je rekening mee houdt', items: cons, icon: '−', tone: 'bg-danger/12 text-danger' },
+];
+---
+
+<section class="grid gap-5 md:grid-cols-2">
+  {
+    columns.map((col) => (
+      <div class="rounded-card border bg-surface p-7">
+        <h2 class="text-2xl font-semibold">{col.heading}</h2>
+        <ul class="mt-5 space-y-4">
+          {col.items.map((item) => (
+            <li class="flex gap-3.5">
+              <span class:list={['mt-0.5 grid size-6 shrink-0 place-items-center rounded-full text-base leading-none font-bold', col.tone]} aria-hidden="true">
+                {col.icon}
+              </span>
+              <div>
+                <h3 class="font-sans text-[15px] font-semibold tracking-normal">{item.title}</h3>
+                <p class="mt-0.5 text-[15px] leading-relaxed text-secondary">{item.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</section>

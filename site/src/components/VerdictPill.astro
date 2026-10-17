@@ -1,0 +1,18 @@
+---
+interface Props {
+  label: string;
+  tone?: 'solid' | 'soft' | 'on-dark';
+  class?: string;
+}
+const { label, tone = 'solid', class: className = '' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'eyebrow inline-flex items-center rounded-full px-3.5 py-1.5',
+    tone === 'solid' && 'bg-violet text-surface',
+    tone === 'soft' && 'bg-violet-100 text-violet-600',
+    tone === 'on-dark' && 'bg-violet/20 text-violet-100 ring-1 ring-violet/60',
+    className,
+  ]}>{label}</span
+>

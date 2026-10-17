@@ -1,0 +1,40 @@
+---
+import { formatScore } from '../lib/verdict';
+
+interface Props {
+  scorecard: Record<
+    'verhaal' | 'wereld' | 'gameplay' | 'exploratie' | 'personages' | 'progressie' | 'toegankelijkheid' | 'value',
+    number
+  >;
+}
+const { scorecard } = Astro.props;
+const labels = {
+  verhaal: 'Verhaal',
+  wereld: 'Wereld',
+  gameplay: 'Gameplay',
+  exploratie: 'Exploratie',
+  personages: 'Personages',
+  progressie: 'Progressie',
+  toegankelijkheid: 'Toegankelijkheid',
+  value: 'Value',
+} as const;
+const rows = (Object.keys(labels) as (keyof typeof labels)[]).map((key) => ({ label: labels[key], score: scorecard[key] }));
+---
+
+<section class="rounded-card border bg-surface p-7">
+  <h2 class="text-2xl font-semibold">The Classy Scorecard</h2>
+  <p class="mt-1 text-sm text-secondary">Ondersteunend — niet het hoofdverdict.</p>
+  <dl class="mt-6 space-y-3.5">
+    {
+      rows.map((row) => (
+        <div class="grid grid-cols-[8.5rem_1fr_2.5rem] items-center gap-4">
+          <dt class="text-sm font-medium">{row.label}</dt>
+          <dd class="h-2 overflow-hidden rounded-full bg-violet-100" aria-hidden="true">
+            <span class="block h-full rounded-full bg-violet" style={`width:${row.score * 10}%`} />
+          </dd>
+          <dd class="text-right font-serif text-[17px] font-semibold tabular-nums">{formatScore(row.score)}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

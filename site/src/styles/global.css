@@ -1,0 +1,107 @@
+@import 'tailwindcss';
+
+/*
+ * Design-tokens. Tailwind v4 leest z'n config uit @theme (geen tailwind.config.js meer).
+ * De standaard Tailwind-kleuren zijn bewust gewist: alleen de merkkleuren hieronder bestaan,
+ * zodat paars de enige accentkleur blijft.
+ */
+@theme {
+  --color-*: initial;
+  --color-ink: #14161f;
+  --color-navy-900: #0b0f24;
+  --color-navy-800: #141a38;
+  --color-violet: #6c5ce7;
+  --color-violet-600: #5a4bd0;
+  --color-violet-100: #eceafb;
+  --color-cream: #f6f4ef;
+  --color-surface: #ffffff;
+  --color-secondary: #5b6070;
+  --color-border: #e7e4dd;
+  --color-success: #2fa36b;
+  --color-danger: #d64545;
+
+  --font-serif: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-script: 'Caveat', cursive;
+
+  --radius-card: 16px;
+  --radius-chip: 12px;
+
+  --container-content: 1100px;
+  --container-prose: 680px;
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+
+  html {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.015em;
+    font-optical-sizing: auto;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-violet);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Uppercase micro-labels ("ONS VERDICT", "TIME VALUE", …) */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Leeskolom voor de MDX-body. Bewust zelf geschreven i.p.v. @tailwindcss/typography (geen extra lib). */
+  .prose-tcg {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-ink);
+  }
+  .prose-tcg > * + * {
+    margin-top: 1.25em;
+  }
+  .prose-tcg > p:first-child {
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    line-height: 1.55;
+  }
+  .prose-tcg h2 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 600;
+    margin-top: 2.2em;
+  }
+  .prose-tcg h2 + * {
+    margin-top: 0.6em;
+  }
+  .prose-tcg a {
+    color: var(--color-violet-600);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-tcg ul {
+    list-style: disc;
+    padding-left: 1.25em;
+  }
+  .prose-tcg strong {
+    font-weight: 600;
+  }
+}

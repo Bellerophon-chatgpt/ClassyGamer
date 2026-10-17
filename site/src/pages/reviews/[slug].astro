@@ -1,0 +1,84 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArtPlaceholder from '../../components/ArtPlaceholder.astro';
+import ClassyScorecard from '../../components/ClassyScorecard.astro';
+import Conclusion from '../../components/Conclusion.astro';
+import ForWho from '../../components/ForWho.astro';
+import InfoChips from '../../components/InfoChips.astro';
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
+import PriceTiers from '../../components/PriceTiers.astro';
+import ProsCons from '../../components/ProsCons.astro';
+import RelatedGames from '../../components/RelatedGames.astro';
+import TimeValue from '../../components/TimeValue.astro';
+import TransparencyLine from '../../components/TransparencyLine.astro';
+import VerdictCard from '../../components/VerdictCard.astro';
+import VerdictPill from '../../components/VerdictPill.astro';
+import { formatDate, verdictLabels } from '../../lib/verdict';
+
+export async function getStaticPaths() {
+  const reviews = await getCollection('reviews');
+  return reviews.map((review) => ({ params: { slug: review.id }, props: { review } }));
+}
+
+const { review } = Astro.props;
+const r = review.data;
+const { Content } = await render(review);
+const verdictLabel = verdictLabels[r.verdict];
+---
+
+<BaseLayout title={r.game} description={r.subtitle}>
+  <main class="mx-auto max-w-content px-4 sm:px-6">
+    <header class="pt-12 pb-8 sm:pt-16">
+      <VerdictPill label={verdictLabel} />
+      <h1 class="mt-5 max-w-4xl text-[42px] leading-[1] font-bold sm:text-[64px]">{r.game}</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-secondary sm:text-xl">{r.subtitle}</p>
+
+      <div class="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+        <span class="grid size-9 place-items-center rounded-full bg-violet font-serif font-bold text-surface" aria-hidden="true">
+          {r.curator.replace(/^The\s+/, '').charAt(0)}
+        </span>
+        <span class="font-semibold">{r.curator}</span>
+        <span class="text-border" aria-hidden="true">|</span>
+        <span class="text-secondary">
+          <time datetime={r.pubDate.toISOString()}>{formatDate(r.pubDate)}</time>
+          {r.readingTime && <span class="ml-1 whitespace-nowrap">· {r.readingTime} leestijd</span>}
+        </span>
+        {r.updatedDate && <span class="text-secondary">· bijgewerkt {formatDate(r.updatedDate)}</span>}
+        {r.spoilerFree && <VerdictPill label="Spoilervrij" tone="soft" class="px-2.5 py-1 text-[10px]" />}
+      </div>
+      <TransparencyLine acquisition={r.acquisition} class="mt-4" />
+    </header>
+
+    <ArtPlaceholder title={r.game} image={r.heroImage} />
+
+    <div class="mt-6">
+      <InfoChips chips={r.chips} />
+    </div>
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14">
+      <div class="lg:order-2">
+        <div class="lg:sticky lg:top-24">
+          <VerdictCard label={verdictLabel} stars={r.stars} text={r.verdictText} />
+        </div>
+      </div>
+      <article class="prose-tcg max-w-prose lg:order-1">
+        <Content />
+      </article>
+    </div>
+
+    <div class="mt-16 space-y-12">
+      <ProsCons pros={r.pros} cons={r.cons} />
+      <div class="grid gap-5 lg:grid-cols-[1.25fr_1fr]">
+        <ClassyScorecard scorecard={r.scorecard} />
+        <TimeValue score={r.timeValue.score} quote={r.timeValue.quote} />
+      </div>
+      <PriceTiers tiers={r.priceTiers} />
+      <ForWho yes={r.forWho.yes} no={r.forWho.no} />
+      <Conclusion label={verdictLabel} text={r.conclusion} />
+      <TransparencyLine acquisition={r.acquisition} />
+      <RelatedGames games={r.related} />
+      <NewsletterSignup />
+    </div>
+  </main>
+</BaseLayout>
