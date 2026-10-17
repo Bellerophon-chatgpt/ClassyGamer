@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsletterSignup from '../components/NewsletterSignup.astro';
 import Home from '../react/pages/Home';
+import { gameImage } from '../lib/gameImages';
 import { starString, verdictLabels, verdictPill } from '../lib/verdict';
 
 const reviews = (await getCollection('reviews')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -15,7 +16,7 @@ const featured = latest && {
   verdict: verdictLabels[latest.data.verdict],
   stars: starString(latest.data.stars),
   meta: [latest.data.curator, latest.data.readingTime].filter(Boolean).join(' · '),
-  image: latest.data.heroImage,
+  image: latest.data.heroImage ?? gameImage(latest.data.game),
 };
 
 const cards = reviews.map((r) => ({
@@ -25,7 +26,7 @@ const cards = reviews.map((r) => ({
   verdict: verdictLabels[r.data.verdict],
   ...verdictPill[r.data.verdict],
   href: `/reviews/${r.id}/`,
-  image: r.data.heroImage,
+  image: r.data.heroImage ?? gameImage(r.data.game),
 }));
 ---
 

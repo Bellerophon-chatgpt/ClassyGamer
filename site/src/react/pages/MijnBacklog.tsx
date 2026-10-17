@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { SEED_BACKLOG } from '../data/backlogSeed';
 import { readBacklog } from '../data/backlog';
 import { SyncStrip } from '../components/SyncStrip';
+import { gameImage } from '../../lib/gameImages';
 import type { BacklogGame, Verdict } from '../types';
 
 const COLUMN_META: { title: string; dot: string; empty: string }[] = [
@@ -132,7 +133,7 @@ export default function MijnBacklog() {
                   <div key={g.id} className="cg-game-card">
                     <div className="cg-game-card-top">
                       <div className="cg-game-cover">
-                        <span className="cg-game-cover-placeholder">art</span>
+                        {gameImage(g.title) ? <img src={gameImage(g.title)} alt="" className="cg-cover-img" /> : <span className="cg-game-cover-placeholder">art</span>}
                       </div>
                       <div className="cg-game-info">
                         <div className="cg-game-title">{g.title}</div>

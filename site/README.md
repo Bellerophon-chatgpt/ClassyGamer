@@ -48,8 +48,23 @@ Handige details:
 - **`verdictText`**: de eerste zin wordt de cursieve tagline in de verdict-kaart, de rest de toelichting.
 - **`priceTiers`**: de balken lopen automatisch af; de laatste (duurste) tier wordt gedempt weergegeven.
 - **`related`**: geef een `href` mee zodra je van die game ook een review hebt.
-- **`heroImage`**: zet het bestand in `public/img/` en verwijs ernaar als `/img/<bestand>`. Zonder afbeelding toont de pagina de placeholder uit het ontwerp.
+- **Afbeelding**: zie *Game-art* hieronder. Wil je voor één review een andere hero dan de standaard game-art, zet dan het bestand in `public/img/` en vul `heroImage: "/img/<bestand>"` in.
 - **In de body** kun je zonder import `<Figure>`, `<Quote>` en `<Spoiler>` gebruiken (zie het sjabloon).
+
+## Game-art
+
+Alle afbeeldingen van games staan in [`src/assets/games/`](src/assets/games/), met de gamenaam als bestandsnaam:
+kleine letters, spaties en leestekens worden een streepje, apostrofs vallen weg.
+
+| Game | Bestand |
+|---|---|
+| The Witcher 3: Wild Hunt | `the-witcher-3-wild-hunt.webp` |
+| Baldur's Gate 3 | `baldurs-gate-3.webp` |
+| The Legend of Zelda: Breath of the Wild | `the-legend-of-zelda-breath-of-the-wild.webp` |
+
+Eén bestand verschijnt automatisch overal waar die game een afbeeldingsvak heeft: de hero van de review, de kaarten
+op Home en `/reviews/`, Discover, Backlog Club, Guides, Mijn Backlog en de Kit-thumbnails. Zonder bestand blijft de
+placeholder uit het ontwerp staan. Gebruik liggende afbeeldingen (16:9 of 3:2), bij voorkeur `.webp`, zo'n 1600–1920 px breed.
 
 ## Nieuwsbrief (Beehiiv)
 
@@ -79,6 +94,7 @@ Vervang of verwijder deze voorbeelden naarmate er echte content is.
 site/
 ├── review-template.mdx        # leeg sjabloon voor een nieuwe review
 ├── src/
+│   ├── assets/games/          # game-art, bestandsnaam = gamenaam (zie Game-art)
 │   ├── content/reviews/       # één .mdx per review
 │   ├── content.config.ts      # schema van de reviews (zod)
 │   ├── pages/                 # routes (Astro)

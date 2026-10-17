@@ -29,7 +29,7 @@ export default function Home({ featured, reviews }: HomeProps) {
     <>
       <section className="cg-hero" style={{ minHeight: '82vh' }}>
         <div className="cg-hero-art">
-          {featured.image ? <img src={featured.image} alt="" className="cg-cover-img" /> : <ArtPlaceholder label="Sleep full-bleed key-art" />}
+          {featured.image ? <img src={featured.image} alt="" className="cg-cover-img" /> : <ArtPlaceholder label="Sleep full-bleed key-art" game={featured.title} />}
         </div>
         <div className="cg-hero-fade" style={{ background: 'linear-gradient(to top, #06152C 6%, rgba(6,21,44,0.55) 45%, rgba(6,21,44,0.2) 100%)' }} />
         <div className="cg-hero-glow" style={{ background: 'radial-gradient(circle at 78% 30%, rgba(124,92,255,0.16), transparent 55%)' }} />
@@ -60,7 +60,7 @@ export default function Home({ featured, reviews }: HomeProps) {
           {cards.map((g) => (
             <a key={g.title} href={g.href} className="cg-card">
               <div className="cg-card-art">
-                {g.image ? <img src={g.image} alt="" className="cg-cover-img" /> : <ArtPlaceholder label="Sleep art" />}
+                {g.image ? <img src={g.image} alt="" className="cg-cover-img" /> : <ArtPlaceholder label="Sleep art" game={g.title} />}
                 <span className="cg-card-badge-bl" style={{ background: g.vbg, color: g.vfg }}>
                   {g.verdict}
                 </span>
@@ -119,7 +119,7 @@ export default function Home({ featured, reviews }: HomeProps) {
           {DISCOVER_TEASER.map((d) => (
             <a key={d.title} href="/reviews" className="cg-card">
               <div className="cg-card-art">
-                <ArtPlaceholder label="Sleep art" />
+                <ArtPlaceholder label="Sleep art" game={d.title} />
                 <span className="cg-card-badge-tr">{d.match} match</span>
               </div>
               <div className="cg-card-body" style={{ padding: '18px 20px', gap: 8 }}>

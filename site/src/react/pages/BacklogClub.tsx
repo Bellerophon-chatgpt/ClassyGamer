@@ -6,7 +6,7 @@ export default function BacklogClub() {
     <>
       <section className="cg-hero" style={{ minHeight: '78vh' }}>
         <div className="cg-hero-art">
-          <ArtPlaceholder label="Sleep full-bleed key-art (Disco Elysium)" />
+          <ArtPlaceholder label="Sleep full-bleed key-art (Disco Elysium)" game="Disco Elysium" />
         </div>
         <div className="cg-hero-fade" style={{ background: 'linear-gradient(to top, #06152C 8%, rgba(6,21,44,0.55) 52%, rgba(6,21,44,0.18) 100%)' }} />
         <div className="cg-hero-glow" style={{ background: 'radial-gradient(circle at 82% 26%, rgba(124,92,255,0.14), transparent 55%)' }} />
@@ -138,7 +138,7 @@ export default function BacklogClub() {
           {PAST_GAMES.map((p) => (
             <div key={p.title} className="cg-past-card">
               <div className="cg-past-art">
-                <ArtPlaceholder label="Sleep art" />
+                <ArtPlaceholder label="Sleep art" game={p.title} />
               </div>
               <div className="cg-past-body">
                 <div className="cg-past-month">{p.month}</div>

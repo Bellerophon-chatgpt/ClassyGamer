@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { verdictLabels, verdictPill } from '../../lib/verdict';
+import { gameImage } from '../../lib/gameImages';
 
 const reviews = (await getCollection('reviews')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
@@ -17,11 +18,12 @@ const reviews = (await getCollection('reviews')).sort((a, b) => b.data.pubDate.v
       {
         reviews.map((r) => {
           const pill = verdictPill[r.data.verdict];
+          const image = r.data.heroImage ?? gameImage(r.data.game);
           return (
             <a href={`/reviews/${r.id}/`} class="cg-card">
               <div class="cg-card-art">
-                {r.data.heroImage ? (
-                  <img src={r.data.heroImage} alt="" class="cg-cover-img" />
+                {image ? (
+                  <img src={image} alt="" class="cg-cover-img" />
                 ) : (
                   <div class="cg-art-slot">
                     <span class="cg-art-slot-label">art</span>

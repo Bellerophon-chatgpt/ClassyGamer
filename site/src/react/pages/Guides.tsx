@@ -6,7 +6,7 @@ export default function Guides() {
     <>
       <section className="cg-hero" style={{ minHeight: '72vh' }}>
         <div className="cg-hero-art">
-          <ArtPlaceholder label="Sleep full-bleed key-art (uitgelichte gids)" />
+          <ArtPlaceholder label="Sleep full-bleed key-art (uitgelichte gids)" game="The Witcher 3: Wild Hunt" />
         </div>
         <div className="cg-hero-fade" style={{ background: 'linear-gradient(to top, #06152C 8%, rgba(6,21,44,0.5) 50%, rgba(6,21,44,0.15) 100%)' }} />
         <div className="cg-hero-glow" style={{ background: 'radial-gradient(circle at 78% 28%, rgba(124,92,255,0.14), transparent 55%)' }} />
@@ -56,7 +56,7 @@ export default function Guides() {
           {GUIDES.map((g) => (
             <a key={g.title} href="/reviews" className="cg-card">
               <div className="cg-card-art" style={{ aspectRatio: '16 / 9' }}>
-                <ArtPlaceholder label="Sleep art" />
+                <ArtPlaceholder label="Sleep art" game={g.game} />
                 <span className="cg-card-badge-tl" style={{ background: g.bg, color: g.fg }}>
                   {g.kind}
                 </span>

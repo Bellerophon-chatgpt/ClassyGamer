@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Figure from '../../components/mdx/Figure.astro';
 import Quote from '../../components/mdx/Quote.astro';
 import Spoiler from '../../components/mdx/Spoiler.astro';
+import { gameImage } from '../../lib/gameImages';
 import { formatDate, formatScore, parseHours, splitFirstSentence, starString, verdictLabels } from '../../lib/verdict';
 
 export async function getStaticPaths() {
@@ -18,6 +19,7 @@ const { Content } = await render(review);
 const verdict = verdictLabels[r.verdict];
 const [verdictTagline, verdictDesc] = splitFirstSentence(r.verdictText);
 const tv = formatScore(r.timeValue.score);
+const heroImage = r.heroImage ?? gameImage(r.game);
 const initial = r.curator.replace(/^The\s+/, '').charAt(0);
 
 const facts: [string, string][] = [
@@ -58,8 +60,8 @@ const backlog = { 'data-title': r.game, 'data-genre': r.chips.genre, 'data-hours
 <BaseLayout title={r.game} description={r.subtitle} variant="review">
   <div class="cg-rev-page">
     <section class="cg-rev-hero">
-      <div class="cg-rev-hero-bg">{r.heroImage && <img src={r.heroImage} alt="" class="cg-cover-img" />}</div>
-      {!r.heroImage && <span class="cg-rev-hero-label">cinematisch game-artwork</span>}
+      <div class="cg-rev-hero-bg">{heroImage && <img src={heroImage} alt="" class="cg-cover-img" />}</div>
+      {!heroImage && <span class="cg-rev-hero-label">cinematisch game-artwork</span>}
       <div class="cg-rev-hero-fade"></div>
       <div class="cg-rev-hero-inner">
         <div class="cg-rev-hero-copy">
@@ -290,7 +292,7 @@ const backlog = { 'data-title': r.game, 'data-genre': r.chips.genre, 'data-hours
                     return (
                       <Tag href={g.href} class="cg-rev-rec-card">
                         <div class="cg-rev-rec-art">
-                          <span class="label">game-art</span>
+                          {gameImage(g.title) ? <img src={gameImage(g.title)} alt="" loading="lazy" class="cg-cover-img" /> : <span class="label">game-art</span>}
                           <span class="match">{g.match}% match</span>
                         </div>
                         <div class="cg-rev-rec-body">

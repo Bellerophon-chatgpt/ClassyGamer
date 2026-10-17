@@ -3,6 +3,7 @@
 import '@fontsource-variable/fraunces/full.css';
 import '@fontsource-variable/inter';
 import '../styles/global.css';
+import { gameImage } from '../lib/gameImages';
 
 const monos = [
   { name: 'Primair', use: 'outline op donker', panel: '#0b2038', bg: 'transparent', ring: '1.5px solid #6C5CE7', fg: '#8B7CFF', text: 'TCG', size: '84px', fs: '22px' },
@@ -11,8 +12,8 @@ const monos = [
   { name: 'Favicon', use: 'tab · app-icon', panel: '#0b2038', bg: '#6C5CE7', ring: 'none', fg: '#fff', text: 'C', size: '40px', fs: '18px' },
 ];
 const thumbs = [
-  { title: 'The Witcher 3', sub: 'Is deze klassieker je 100 uur nog waard?', verdict: 'Worth your time', tv: '8,5', glow: 'rgba(124,92,255,0.4)', badgeBg: '#6C5CE7', badgeFg: '#fff', badgeBorder: '#6C5CE7', caption: 'Standaard: positief verdict, violette badge.' },
-  { title: 'Pentiment', sub: 'De game die bijna iedereen miste.', verdict: 'Hidden gem', tv: '9,0', glow: 'rgba(0,166,161,0.34)', badgeBg: 'rgba(108,92,231,0.2)', badgeFg: '#b3a9f0', badgeBorder: 'rgba(108,92,231,0.7)', caption: 'Variant: Hidden Gem, outline-badge voor Discover-content.' },
+  { title: 'The Witcher 3', game: 'The Witcher 3: Wild Hunt', sub: 'Is deze klassieker je 100 uur nog waard?', verdict: 'Worth your time', tv: '8,5', glow: 'rgba(124,92,255,0.4)', badgeBg: '#6C5CE7', badgeFg: '#fff', badgeBorder: '#6C5CE7', caption: 'Standaard: positief verdict, violette badge.' },
+  { title: 'Pentiment', game: 'Pentiment', sub: 'De game die bijna iedereen miste.', verdict: 'Hidden gem', tv: '9,0', glow: 'rgba(0,166,161,0.34)', badgeBg: 'rgba(108,92,231,0.2)', badgeFg: '#b3a9f0', badgeBorder: 'rgba(108,92,231,0.7)', caption: 'Variant: Hidden Gem, outline-badge voor Discover-content.' },
 ];
 ---
 
@@ -86,9 +87,13 @@ const thumbs = [
             thumbs.map((t) => (
               <div>
                 <div class="thumb" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#081B38;border:1px solid rgba(247,245,237,0.12);">
-                  <div class="cg-art-slot" style="position:absolute;inset:0;">
-                    <span class="cg-art-slot-label">game-art (1280×720)</span>
-                  </div>
+                  {gameImage(t.game) ? (
+                    <img src={gameImage(t.game)} alt="" class="cg-cover-img" style="position:absolute;inset:0;" />
+                  ) : (
+                    <div class="cg-art-slot" style="position:absolute;inset:0;">
+                      <span class="cg-art-slot-label">game-art (1280×720)</span>
+                    </div>
+                  )}
                   <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(95deg,rgba(6,21,44,0.96) 0%,rgba(6,21,44,0.86) 40%,rgba(6,21,44,0.28) 72%,rgba(6,21,44,0.08) 100%);" />
                   <div style={`position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 88% 84%,${t.glow},transparent 46%);`} />
                   <div style="position:absolute;left:5.4cqw;top:6cqw;display:flex;align-items:center;gap:2.6cqw;pointer-events:none;">
