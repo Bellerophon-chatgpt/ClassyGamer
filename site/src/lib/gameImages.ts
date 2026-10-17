@@ -1,5 +1,6 @@
 // Game-art: zet een afbeelding in src/assets/games/ met de gamenaam als bestandsnaam
-// (bv. "Baldur's Gate 3" → baldurs-gate-3.webp) en hij verschijnt overal waar die game een afbeeldingsvak heeft.
+// (bv. "Baldur's Gate 3" → baldurs-gate-3.webp, of BaldursGate3.webp) en hij verschijnt overal waar die game
+// een afbeeldingsvak heeft. Hoofdletters, spaties en streepjes maken voor het matchen niet uit.
 const files = import.meta.glob<string>('../assets/games/*.{webp,avif,jpg,jpeg,png}', {
   eager: true,
   query: '?url',
@@ -15,7 +16,10 @@ export const slugify = (title: string) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
-const bySlug = new Map(Object.entries(files).map(([path, url]) => [path.split('/').pop()!.replace(/\.\w+$/, ''), url]));
+/** Matchsleutel: alleen letters en cijfers, zodat "citizen-sleeper" en "CitizenSleeper" hetzelfde zijn. */
+const key = (name: string) => slugify(name).replace(/-/g, '');
+
+const byKey = new Map(Object.entries(files).map(([path, url]) => [key(path.split('/').pop()!.replace(/\.\w+$/, '')), url]));
 
 /** URL van de afbeelding voor deze game, of undefined als er (nog) geen is. */
-export const gameImage = (title?: string) => (title ? bySlug.get(slugify(title)) : undefined);
+export const gameImage = (title?: string) => (title ? byKey.get(key(title)) : undefined);

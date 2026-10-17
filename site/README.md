@@ -53,8 +53,10 @@ Handige details:
 
 ## Game-art
 
-Alle afbeeldingen van games staan in [`src/assets/games/`](src/assets/games/), met de gamenaam als bestandsnaam:
-kleine letters, spaties en leestekens worden een streepje, apostrofs vallen weg.
+Alle afbeeldingen van games staan in [`src/assets/games/`](src/assets/games/), met de volledige gamenaam als
+bestandsnaam. Hoofdletters, spaties, streepjes en leestekens maken voor het matchen niet uit: `CitizenSleeper.jpg`
+en `citizen-sleeper.webp` werken allebei. Wel moet de náám volledig zijn: voor *Kingdom Come: Deliverance* is
+`KingdomCome.jpg` niet genoeg. De conventie in de map is kleine letters met streepjes:
 
 | Game | Bestand |
 |---|---|
